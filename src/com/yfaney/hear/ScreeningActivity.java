@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Random;
 
 import com.yfaney.hear.TrialRunActivity.ToneThread;
-import com.yfaney.hear_draft.R;
+import com.yfaney.hear.R;
 
 import android.media.AudioFormat;
 import android.media.AudioManager;

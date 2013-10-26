@@ -1,6 +1,6 @@
 package com.yfaney.hear;
 
-import com.yfaney.hear_draft.R;
+import com.yfaney.hear.R;
 
 import android.media.AudioFormat;
 import android.media.AudioManager;
