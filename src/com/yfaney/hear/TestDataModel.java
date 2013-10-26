@@ -1,25 +1,25 @@
 package com.yfaney.hear;
 
 public class TestDataModel {
-	private int ID;
+	private int id;
 	private int setID;
 	private int earSide;
 	private int frequency;
 	private short deciBel;
-	public TestDataModel(int iD, int setID, int earSide, int frequency,
+	public TestDataModel(int id, int setID, int earSide, int frequency,
 			short deciBel) {
 		super();
-		ID = iD;
+		this.id = id;
 		this.setID = setID;
 		this.earSide = earSide;
 		this.frequency = frequency;
 		this.deciBel = deciBel;
 	}
 	public int getID() {
-		return ID;
+		return id;
 	}
-	public void setID(int iD) {
-		ID = iD;
+	public void setID(int id) {
+		this.id = id;
 	}
 	public int getSetID() {
 		return setID;

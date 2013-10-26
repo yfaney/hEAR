@@ -151,7 +151,7 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 			}
 			else if(event.getAction() == MotionEvent.ACTION_UP){
 				if (testSetIdx < scrSet.size()){
-					scrTestData.add(new TestDataModel(1, testSetIdx, mToneThread.get_ear_side(), (int)mToneThread.getSynth_frequency(), mToneThread.getdB()));
+					scrTestData.add(new TestDataModel(0, testSetIdx, mToneThread.get_ear_side(), (int)mToneThread.getSynth_frequency(), mToneThread.getdB()));
 		            Toast.makeText(this, "freq= "+scrTestData.get(scrTestData.size()-1).getFrequency()+"&dB="+scrTestData.get(scrTestData.size()-1).getDeciBel(), Toast.LENGTH_SHORT).show();
 					mMainHandler.sendEmptyMessage(SEND_THREAD_STOP_MESSAGE);
 					layout.setBackgroundResource(R.color.red);
@@ -160,13 +160,14 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 					/* End Screening */
 			    	Time now = new Time();
 			    	now.setToNow();
-					scrTestData.add(new TestDataModel(1, testSetIdx, mToneThread.get_ear_side(), (int)mToneThread.getSynth_frequency(), mToneThread.getdB()));
-					scrUserData.add(new ScreeningModel(1,USER_FIRSTNAME, USER_LASTNAME, USER_USERID, now.toString()));
+			    	now.format("yyyy-MM-dd'T'HH:mm:ss");
+					scrTestData.add(new TestDataModel(0, 0, mToneThread.get_ear_side(), (int)mToneThread.getSynth_frequency(), mToneThread.getdB()));
+					scrUserData.add(new ScreeningModel(0,USER_FIRSTNAME, USER_LASTNAME, USER_USERID, now.toString()));
 					mMainHandler.sendEmptyMessage(SEND_THREAD_STOP_MESSAGE);
 					layout.setBackgroundResource(R.color.black);
 					layout.setOnTouchListener(null);
 					ScreeningSetDBManager dbManager = new ScreeningSetDBManager(this);
-					long setId = dbManager.insertUserData(new ScreeningModel(1,USER_FIRSTNAME, USER_LASTNAME, USER_USERID, now.toString()));
+					long setId = dbManager.insertUserData(scrUserData.get(0));
 					textViewTesting.setText(getResources().getString(R.string.btn_scrningComplete));
 					String testResult = "";
 					for(int i=1 ; i < scrTestData.size() ; i++){

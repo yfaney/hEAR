@@ -107,8 +107,8 @@ public class ScreeningSetDBManager {
         String sql = "delete from " + tableName + " where id = " + index + ";";
         db.execSQL(sql);
     }
-    public void removeData(int index) {
-        String sql = "delete from " + tableName2 + " where id = " + index + ";";
+    public void removeDatas(int setID) {
+        String sql = "delete from " + tableName2 + " where setID = " + setID + ";";
         db.execSQL(sql);
     }
  

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">hEAR_Draft</string>
+    <string name="app_name">hEAR v0.62</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_admin">Administrator Setup</string>
@@ -28,6 +28,7 @@
 
 * Repeat until test is completed</string>
     <string name="txt_instruction2">You will have a brief trial to get you used to the procedure.</string>
+    <string name="txt_noresult">No Result</string>
     <string name="btn_subject">Subject</string>
     <string name="btn_screener">Screener</string>
     <string name="btn_Next">Next</string>
@@ -44,6 +45,8 @@
     <string name="btn_login">Log In</string>
     <string name="btn_newScreener">Add New Screener</string>
     <string name="btn_register">Register</string>
-    
+    <string name="menu_action">Select Action</string>
+    <string name="menu_edit">Edit</string>
+	<string name="menu_delete">Delete</string>
     	
 </resources>

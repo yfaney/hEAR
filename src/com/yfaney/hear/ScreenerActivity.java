@@ -15,15 +15,15 @@ public class ScreenerActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.screener_main);
-		/*Button buttonScrLogIn = (Button)findViewById(R.id.buttonScrLogIn);*/
+		Button buttonScrLogIn = (Button)findViewById(R.id.buttonScrLogIn);
 		Button buttonAddNewScrnr = (Button)findViewById(R.id.buttonAddNewScrnr);
-		/*buttonScrLogIn.setOnClickListener( new Button.OnClickListener(){
+		buttonScrLogIn.setOnClickListener( new Button.OnClickListener(){
         	@Override
 			public void onClick(View v) {
         		Intent intent = new Intent(ScreenerActivity.this, ScreenerLoginActivity.class); // 평범한 Intent 생성
         		//startActivity(intent);                                    // Activity 실행
         		startActivityForResult(intent, MainActivity.SCREENERACTION);        	}
-        });*/
+        });
         buttonAddNewScrnr.setOnClickListener( new Button.OnClickListener(){
         	@Override
 			public void onClick(View v) {
