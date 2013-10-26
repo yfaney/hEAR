@@ -1,21 +1,24 @@
 package com.yfaney.hear;
 
 public class ScreeningModel {
+	private int ID;
 	private String firstName;
 	private String lastName;
 	private String userId;
-	private int earSide;
-	private int frequency;
-	private short deciBel;
-	public ScreeningModel(String firstName, String lastName, String userId,
-			int earSide, int frequency, short deciBel) {
+	private String createdOn;
+	public ScreeningModel(int ID, String firstName, String lastName, String userId, String createdOn) {
 		super();
+		this.ID = ID;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.userId = userId;
-		this.earSide = earSide;
-		this.frequency = frequency;
-		this.deciBel = deciBel;
+		this.createdOn = createdOn;
+	}
+	public int getID() {
+		return ID;
+	}
+	public void setID(int iD) {
+		ID = iD;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -35,22 +38,10 @@ public class ScreeningModel {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public int getEarSide() {
-		return earSide;
+	public String getCreatedOn() {
+		return createdOn;
 	}
-	public void setEarSide(int earSide) {
-		this.earSide = earSide;
-	}
-	public int getFrequency() {
-		return frequency;
-	}
-	public void setFrequency(int frequency) {
-		this.frequency = frequency;
-	}
-	public short getDeciBel() {
-		return deciBel;
-	}
-	public void setDeciBel(short deciBel) {
-		this.deciBel = deciBel;
+	public void setCreatedOn(String createdOn) {
+		this.createdOn = createdOn;
 	}
 }

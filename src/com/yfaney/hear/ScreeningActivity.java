@@ -18,6 +18,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.text.format.Time;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MotionEvent;
@@ -34,26 +35,24 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 	private final static int SEND_CHANGE_FREQ_MESSAGE = 1;
 	private final static int SEND_CHANGE_EAR_MESSAGE = 2;
 	private final static int SEND_CHANGE_DB_MESSAGE = 3;
+	
+	/* Temporary User Data */
+	final static String USER_FIRSTNAME = "Younghwan";
+	final static String USER_LASTNAME = "Jang";
+	final static String USER_USERID = "yfaney";
+	
+	
+	/* Temporary User Data End */
 	int sampleRate = 12000;
     private SendMassgeHandler mMainHandler = null;
     private static ToneThread mToneThread = null;
     int[] freq = null;
     int[] freq2deciBel = null;
-    ArrayList<ScreeningTestSet> screeningSet = new ArrayList<ScreeningTestSet>();
-    ArrayList<ScreeningModel> screeningData = new ArrayList<ScreeningModel>();
+    ArrayList<ScreeningTestSet> scrSet = new ArrayList<ScreeningTestSet>();
+    ArrayList<TestDataModel> scrTestData = new ArrayList<TestDataModel>();
+    ArrayList<ScreeningModel> scrUserData = new ArrayList<ScreeningModel>();
     int testSetIdx = 0;
 
-    /* SQLite Declaration From Here */
-    // 상수 관련
-    String dbName = "screening.db"; // name of Database;
-    String tableName = "screening"; // name of Table;
-    int dbMode = Context.MODE_PRIVATE;
-     
-    // Database 관련 객체들
-    SQLiteDatabase db;
-    /* SQLite Declaration To Here */
-    
-    
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -74,8 +73,6 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
         /* Make Handler */
         mMainHandler = new SendMassgeHandler();
         
-        /* DB Create or Open */
-        db = openOrCreateDatabase(dbName,dbMode,null);
 	}
 
 	@Override
@@ -116,11 +113,11 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 			buttonBeginScrng.setVisibility(View.INVISIBLE);
 			for(int j=0; j<2;j++){
 				for(int i=0;i < freq.length; i++){
-					screeningSet.add(new ScreeningTestSet(freq[i], (short)freq2deciBel[i], ToneThread.LEFT_EAR));
-					screeningSet.add(new ScreeningTestSet(freq[i], (short)freq2deciBel[i], ToneThread.RIGHT_EAR));				
+					scrSet.add(new ScreeningTestSet(freq[i], (short)freq2deciBel[i], ToneThread.LEFT_EAR));
+					scrSet.add(new ScreeningTestSet(freq[i], (short)freq2deciBel[i], ToneThread.RIGHT_EAR));				
 				}
 			}
-			Collections.shuffle(screeningSet);
+			Collections.shuffle(scrSet);
 			layout.setBackgroundResource(R.color.red);
 			layout.setOnTouchListener(this);
 			testSetIdx = 0;
@@ -143,9 +140,9 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 		switch(v.getId()){
 		case R.id.layout_screening:
 			if(event.getAction() == MotionEvent.ACTION_DOWN){
-				if (testSetIdx < screeningSet.size()){
+				if (testSetIdx < scrSet.size()){
 					layout.setBackgroundResource(R.color.green);
-					mToneThread = new ToneThread(sampleRate, screeningSet.get(testSetIdx).getEarSide(), screeningSet.get(testSetIdx).getFrequency(), screeningSet.get(testSetIdx).getDeciBel());
+					mToneThread = new ToneThread(sampleRate, scrSet.get(testSetIdx).getEarSide(), scrSet.get(testSetIdx).getFrequency(), scrSet.get(testSetIdx).getDeciBel());
 					mToneThread.start();
 					testSetIdx++;
 				}
@@ -153,22 +150,28 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 				}
 			}
 			else if(event.getAction() == MotionEvent.ACTION_UP){
-				if (testSetIdx < screeningSet.size()){
-					screeningData.add(new ScreeningModel("Younghwan", "Jang", "yfaney", mToneThread.get_ear_side(), (int)mToneThread.getSynth_frequency(), mToneThread.getdB()));
-		            Toast.makeText(this, "freq= "+screeningData.get(screeningData.size()-1).getFrequency()+"&dB="+screeningData.get(screeningData.size()-1).getDeciBel(), Toast.LENGTH_SHORT).show();
+				if (testSetIdx < scrSet.size()){
+					scrTestData.add(new TestDataModel(1, testSetIdx, mToneThread.get_ear_side(), (int)mToneThread.getSynth_frequency(), mToneThread.getdB()));
+		            Toast.makeText(this, "freq= "+scrTestData.get(scrTestData.size()-1).getFrequency()+"&dB="+scrTestData.get(scrTestData.size()-1).getDeciBel(), Toast.LENGTH_SHORT).show();
 					mMainHandler.sendEmptyMessage(SEND_THREAD_STOP_MESSAGE);
 					layout.setBackgroundResource(R.color.red);
 				}
 				else{
 					/* End Screening */
-					screeningData.add(new ScreeningModel("Younghwan", "Jang", "yfaney", mToneThread.get_ear_side(), (int)mToneThread.getSynth_frequency(), mToneThread.getdB()));
+			    	Time now = new Time();
+			    	now.setToNow();
+					scrTestData.add(new TestDataModel(1, testSetIdx, mToneThread.get_ear_side(), (int)mToneThread.getSynth_frequency(), mToneThread.getdB()));
+					scrUserData.add(new ScreeningModel(1,USER_FIRSTNAME, USER_LASTNAME, USER_USERID, now.toString()));
 					mMainHandler.sendEmptyMessage(SEND_THREAD_STOP_MESSAGE);
 					layout.setBackgroundResource(R.color.black);
 					layout.setOnTouchListener(null);
+					ScreeningSetDBManager dbManager = new ScreeningSetDBManager(this);
+					long setId = dbManager.insertUserData(new ScreeningModel(1,USER_FIRSTNAME, USER_LASTNAME, USER_USERID, now.toString()));
 					textViewTesting.setText(getResources().getString(R.string.btn_scrningComplete));
 					String testResult = "";
-					for(int i=1 ; i < screeningData.size() ; i++){
-						testResult += i + ": " + screeningData.get(i).getDeciBel() + "/" + screeningData.get(i).getFrequency() + " ";
+					for(int i=1 ; i < scrTestData.size() ; i++){
+						testResult += i + ": " + scrTestData.get(i).getDeciBel() + "/" + scrTestData.get(i).getFrequency() + " ";
+						dbManager.insertData(scrTestData.get(i), setId);
 					}
 					textViewTesting.setText(testResult);
 			        Button buttonExitToMain = (Button)findViewById(R.id.buttonExitToMain);
@@ -181,70 +184,6 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 		}
 	}
 	
-    // Database 생성 및 열기
-    public void createDatabase(String dbName, int dbMode){
-        db = openOrCreateDatabase(dbName,dbMode,null);
-    }
-     
-    // Table 생성
-    public void createTable(){
-        String sql = "create table " + tableName + "(id integer primary key autoincrement, "+"voca text not null)";
-        db.execSQL(sql);
-    }
-     
-    // Table 삭제
-    public void removeTable(){
-        String sql = "drop table " + tableName;
-        db.execSQL(sql);
-    }
-     
-    // Data 추가
-    public void insertData(String voca){
-        String sql = "insert into " + tableName + " values(NULL, '" + voca +"');";
-        db.execSQL(sql);
-    }
-     
-    // Data 업데이트
-    public void updateData(int index, String voca){
-        String sql = "update " + tableName + " set voca = '" + voca +"' where id = "+index +";";
-        db.execSQL(sql);
-    }
-    // Data 삭제
-    public void removeData(int index){
-        String sql = "delete from " + tableName + " where id = "+index+";";
-        db.execSQL(sql);
-    }
-     
-    // Data 읽기(꺼내오기)
-    public void selectData(int index){
-        String sql = "select * from " +tableName+ " where id = "+index+";";
-        Cursor result = db.rawQuery(sql, null);
-         
-        // result(Cursor 객체)가 비어 있으면 false 리턴
-        if(result.moveToFirst()){
-            int id = result.getInt(0);
-            String voca = result.getString(1);
-            Toast.makeText(this, "index= "+id+" voca="+voca, 0).show();
-        }
-        result.close();
-    }
-     
-     
-    // 모든 Data 읽기
-    public void selectAll(){
-        String sql = "select * from " + tableName + ";";
-        Cursor results = db.rawQuery(sql, null);
-         
-        results.moveToFirst();
-         
-        while(!results.isAfterLast()){
-            int id = results.getInt(0);
-            String voca = results.getString(1);
-            Toast.makeText(this, "index= "+id+" voca="+voca, 0).show();
-            results.moveToNext();
-        }
-        results.close();
-    }
 	// Handler 클래스
 	static class SendMassgeHandler extends Handler {
 		@Override

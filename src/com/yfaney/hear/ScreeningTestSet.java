@@ -4,6 +4,7 @@ public class ScreeningTestSet {
 	private int frequency;
 	private short deciBel;
 	private int earSide;
+
 	public int getFrequency() {
 		return frequency;
 	}
