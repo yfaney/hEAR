@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="frequency">
+        <item>125</item>
+        <item>250</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>4000</item>
+        <item>8000</item>
+    </integer-array>
+    <integer-array name="freq2db">
+        <item>40</item>
+        <item>40</item>
+        <item>40</item>
+        <item>50</item>
+        <item>65</item>
+        <item>80</item>
+        <item>85</item>
+    </integer-array>
+	<string-array name="decibel_amplitute">
+		<item>3</item>
+		<item>4</item>
+		<item>5</item>
+		<item>6</item>
+		<item>8</item>
+		<item>10</item>
+		<item>13</item>
+		<item>16</item>
+		<item>20</item>
+		<item>25</item>
+		<item>32</item>
+		<item>40</item>
+		<item>50</item>
+		<item>63</item>
+		<item>79</item>
+		<item>100</item>
+		<item>126</item>
+		<item>158</item>
+		<item>200</item>
+		<item>251</item>
+		<item>316</item>
+		<item>398</item>
+		<item>501</item>
+		<item>631</item>
+		<item>794</item>
+		<item>1000</item>
+	</string-array>
+	<string-array name="decibel">
+		<item>10</item>
+		<item>12</item>
+		<item>14</item>
+		<item>16</item>
+		<item>18</item>
+		<item>20</item>
+		<item>22</item>
+		<item>24</item>
+		<item>26</item>
+		<item>28</item>
+		<item>30</item>
+		<item>32</item>
+		<item>34</item>
+		<item>36</item>
+		<item>38</item>
+		<item>40</item>
+		<item>42</item>
+		<item>44</item>
+		<item>46</item>
+		<item>48</item>
+		<item>50</item>
+		<item>52</item>
+		<item>54</item>
+		<item>56</item>
+		<item>58</item>
+		<item>60</item>
+	</string-array>
+</resources>

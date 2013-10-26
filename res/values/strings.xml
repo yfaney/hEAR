@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">hEAR_Draft</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_admin">Administrator Setup</string>
+    <string name="title_activity_screener_login">Screener Login</string>
+    <string name="title_activity_subj_first">Subject Main</string>
+    <string name="title_activity_brief_inst">Brief Instruction</string>
+    <string name="title_activity_trial_run">Trial Running</string>
+    <string name="title_activity_screening">Screening</string>
+    <string name="title_activity_screener">Screener</string>
+    <string name="title_activity_subj_list">Subject List</string>
+    <string name="title_activity_subj_graph">Graph</string>
+    <string name="title_activity_new_screener">Add New Screener</string>
+    <string name="txt_firstName">First Name</string>
+    <string name="txt_lastName">Last Name</string>
+    <string name="txt_name">Name</string>
+    <string name="txt_emailAdr">e-Mail Address</string>
+    <string name="txt_userId">User ID</string>
+    <string name="txt_userPw">Password</string>
+    <string name="txt_instruction1">* Please make sure to make the volume max.
+        
+* Touch screen and hold to begin test.
+
+* Tone will start, release screen when you stop hearing tone.
+
+* Repeat until test is completed</string>
+    <string name="txt_instruction2">You will have a brief trial to get you used to the procedure.</string>
+    <string name="btn_subject">Subject</string>
+    <string name="btn_screener">Screener</string>
+    <string name="btn_Next">Next</string>
+	<string name="btn_Back">Back</string>
+	<string name="btn_beginTrial">Touch to begin Trial</string>
+    <string name="btn_beginScrning">Touch to begin Screening</string>
+    <string name="btn_trialStart">Touch and keep touching the screen anywhere to hear the tone sounds. You can go back with press back button on your phone.</string>
+    <string name="btn_trialTesting">The tone changes with clicking background</string>
+    <string name="btn_trialComplete">Trial Complete</string>
+    <string name="btn_scrningStart">Now you can hear several tone sounds with clicking the button below and tone changes with clicking background. The sounds play if the background color becomes green.</string>
+    <string name="btn_scrningTesting">Please release your finger if you cannot hear the tone sound.</string>
+    <string name="btn_scrningComplete">Screening Complete</string>
+    <string name="btn_exitToMain">Exit to Main Menu</string>
+    <string name="btn_login">Log In</string>
+    <string name="btn_newScreener">Add New Screener</string>
+    <string name="btn_register">Register</string>
+    
+    	
+</resources>

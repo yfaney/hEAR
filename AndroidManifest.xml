@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yfaney.hear_draft"
+    android:versionCode="1"
+    android:versionName="0.57" android:installLocation="auto">
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.yfaney.hear.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.yfaney.hear.AdminActivity"
+            android:label="@string/title_activity_admin" >
+        </activity>
+        <activity
+            android:name="com.yfaney.hear.ScreenerLoginActivity"
+            android:label="@string/title_activity_screener_login"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+        </activity>
+        <activity
+            android:name="com.yfaney.hear.SubjFirstActivity"
+            android:label="@string/title_activity_subj_first" >
+        </activity>
+        <activity
+            android:name="com.yfaney.hear.BriefInstActivity"
+            android:label="@string/title_activity_brief_inst" >
+        </activity>
+        <activity
+            android:name="com.yfaney.hear.TrialRunActivity"
+            android:label="@string/title_activity_trial_run" >
+        </activity>
+        <activity
+            android:name="com.yfaney.hear.ScreeningActivity"
+            android:label="@string/title_activity_screening" >
+        </activity>
+        <activity
+            android:name="com.yfaney.hear.ScreenerActivity"
+            android:label="@string/title_activity_screener" >
+        </activity>
+        <activity
+            android:name="com.yfaney.hear.SubjListActivity"
+            android:label="@string/title_activity_subj_list" >
+        </activity>
+        <activity
+            android:name="com.yfaney.hear.SubjGraphActivity"
+            android:label="@string/title_activity_subj_graph" >
+        </activity>
+        <activity
+            android:name="com.yfaney.hear.NewScreenerActivity"
+            android:label="@string/title_activity_new_screener" >
+        </activity>
+    </application>
+
+</manifest>
