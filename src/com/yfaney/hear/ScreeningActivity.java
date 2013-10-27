@@ -160,21 +160,20 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 					/* End Screening */
 			    	Time now = new Time();
 			    	now.setToNow();
-			    	now.format("yyyy-MM-dd'T'HH:mm:ss");
 					scrTestData.add(new TestDataModel(0, 0, mToneThread.get_ear_side(), (int)mToneThread.getSynth_frequency(), mToneThread.getdB()));
-					scrUserData.add(new ScreeningModel(0,USER_FIRSTNAME, USER_LASTNAME, USER_USERID, now.toString()));
+					scrUserData.add(new ScreeningModel(0,USER_FIRSTNAME, USER_LASTNAME, USER_USERID, now.format("yyyy-MM-dd'T'HH:mm:ss")));
 					mMainHandler.sendEmptyMessage(SEND_THREAD_STOP_MESSAGE);
 					layout.setBackgroundResource(R.color.black);
 					layout.setOnTouchListener(null);
 					ScreeningSetDBManager dbManager = new ScreeningSetDBManager(this);
 					long setId = dbManager.insertUserData(scrUserData.get(0));
 					textViewTesting.setText(getResources().getString(R.string.btn_scrningComplete));
-					String testResult = "";
 					for(int i=1 ; i < scrTestData.size() ; i++){
-						testResult += i + ": " + scrTestData.get(i).getDeciBel() + "/" + scrTestData.get(i).getFrequency() + " ";
+						//testResult += i + ": " + scrTestData.get(i).getDeciBel() + "/" + scrTestData.get(i).getFrequency() + " ";
 						dbManager.insertData(scrTestData.get(i), setId);
 					}
-					textViewTesting.setText(testResult);
+					//String testResult = "";
+					//textViewTesting.setText(testResult);
 			        Button buttonExitToMain = (Button)findViewById(R.id.buttonExitToMain);
 			        buttonExitToMain.setVisibility(View.VISIBLE);  // 화면에 안보임
 				}
