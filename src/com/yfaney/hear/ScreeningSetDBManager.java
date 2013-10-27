@@ -48,12 +48,18 @@ public class ScreeningSetDBManager {
             // db.execSQL(dropSql);
  
             String createSql = "create table " + tableName + " ("
-                    + "id integer primary key autoincrement, " + "FirstName text" + "LastName text, "
-                    + "UserID text, "+ "CreatedOn text)";
+                    + "id integer primary key autoincrement, "
+            		+ "FirstName text, "
+                    + "LastName text, "
+                    + "UserID text, "
+                    + "CreatedOn text)";
             arg0.execSQL(createSql);
             createSql = "create table " + tableName2 + " ("
-                    + "id integer primary key autoincrement, " + "setID integer" + "Frequency integer, "
-                    + "deciBel integer, " + "earSide integer)";
+                    + "id integer primary key autoincrement, "
+            		+ "setID integer, "
+                    + "Frequency integer, "
+                    + "deciBel integer, "
+                    + "earSide integer)";
             arg0.execSQL(createSql);
             Toast.makeText(context, "DB is opened", Toast.LENGTH_SHORT).show();
         }
@@ -138,7 +144,24 @@ public class ScreeningSetDBManager {
         ArrayList<TestDataModel> testsets = new ArrayList<TestDataModel>();
  
         while (!results.isAfterLast()) {
-        	TestDataModel testset = new TestDataModel(results.getInt(0), results.getInt(1), results.getInt(3), results.getInt(3), results.getShort(2));
+        	TestDataModel testset = new TestDataModel(results.getInt(0), results.getInt(1), results.getInt(4), results.getInt(2), results.getShort(3));
+        	testsets.add(testset);
+            results.moveToNext();
+        }
+        results.close();
+        return testsets;
+    }
+    // 데이터 범위 검색
+    public ArrayList<TestDataModel> selectTestDatas(int setID, int earSide) {
+        String sql = "select * from " + tableName2 + " where setID = " + setID
+                + " and earSide = " + earSide + ";";
+        Cursor results = db.rawQuery(sql, null);
+ 
+        results.moveToFirst();
+        ArrayList<TestDataModel> testsets = new ArrayList<TestDataModel>();
+ 
+        while (!results.isAfterLast()) {
+        	TestDataModel testset = new TestDataModel(results.getInt(0), results.getInt(1), results.getInt(4), results.getInt(2), results.getShort(3));
         	testsets.add(testset);
             results.moveToNext();
         }

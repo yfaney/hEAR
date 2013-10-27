@@ -16,7 +16,7 @@
         android:layout_alignLeft="@+id/buttonBeginTrial"
         android:layout_alignParentTop="true"
         android:layout_marginTop="60dp"
-        android:text="@string/btn_trialStart" />
+        android:text="@string/txt_instruction1" />
 
     <Button
         android:id="@+id/buttonBeginTrial"

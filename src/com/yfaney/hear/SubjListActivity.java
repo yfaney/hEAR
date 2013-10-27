@@ -32,10 +32,11 @@ public class SubjListActivity extends Activity implements OnItemClickListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.screener_subj_list);
 		txtEmpty = (TextView)findViewById(R.id.textEmptyView);
+		subjList = (ListView)findViewById(R.id.listViewSubject);
 		list = new ArrayList<TableItem>();
 		ScreeningSetDBManager dbManager = new ScreeningSetDBManager(this);
 	    ArrayList<ScreeningModel> scrUserData = dbManager.selectSetAll();
-	    for(int i=1 ; i < scrUserData.size() ; i++){
+	    for(int i=0 ; i < scrUserData.size() ; i++){
 	    	list.add(new TableItem(scrUserData.get(i).getCreatedOn(), scrUserData.get(i).getFirstName(), scrUserData.get(i).getID(), null));
 	    }
 	    if(list.isEmpty()){
@@ -70,9 +71,9 @@ public class SubjListActivity extends Activity implements OnItemClickListener{
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
 		// TODO Auto-generated method stub
 		if(parent == subjList){
-			Intent mainIntent = getIntent();
-			mainIntent.putExtra("selectedItem", list.get(position).getFieldId());
+			//Intent mainIntent = getIntent();
 			Intent intent = new Intent(this, SubjGraphActivity.class); // 평범한 Intent 생성
+			intent.putExtra("selectedItem", list.get(position).getFieldId());
     		startActivity(intent);                                    // Activity 실행
 //			Intent i = new Intent(Intent.ACTION_GET_CONTENT);   
 //			i.setType("vnd.android.cursor.item/phone_v2");  

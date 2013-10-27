@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">hEAR v0.62</string>
+    <string name="app_name">hEAR v0.65</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_admin">Administrator Setup</string>
@@ -20,12 +20,9 @@
     <string name="txt_emailAdr">e-Mail Address</string>
     <string name="txt_userId">User ID</string>
     <string name="txt_userPw">Password</string>
-    <string name="txt_instruction1">* Please make sure to make the volume max.
-        
+    <string name="txt_instruction1">* Please make sure to adjust the volume enough.
 * Touch screen and hold to begin test.
-
 * Tone will start, release screen when you stop hearing tone.
-
 * Repeat until test is completed</string>
     <string name="txt_instruction2">You will have a brief trial to get you used to the procedure.</string>
     <string name="txt_noresult">No Result</string>
@@ -38,7 +35,11 @@
     <string name="btn_trialStart">Touch and keep touching the screen anywhere to hear the tone sounds. You can go back with press back button on your phone.</string>
     <string name="btn_trialTesting">The tone changes with clicking background</string>
     <string name="btn_trialComplete">Trial Complete</string>
-    <string name="btn_scrningStart">Now you can hear several tone sounds with clicking the button below and tone changes with clicking background. The sounds play if the background color becomes green.</string>
+    <string name="btn_scrningStart">Now you can hear several tone sounds after clicking the button below with preess &amp; release. Please see the instructions below.
+* Please make sure to adjust the volume enough.
+* Touch screen and hold to begin test.
+* Tone will start, release screen when you stop hearing tone.
+* Repeat until test is completed</string>
     <string name="btn_scrningTesting">Please release your finger if you cannot hear the tone sound.</string>
     <string name="btn_scrningComplete">Screening Complete</string>
     <string name="btn_exitToMain">Exit to Main Menu</string>
