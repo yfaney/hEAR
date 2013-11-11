@@ -2,9 +2,7 @@ package com.yfaney.hear;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
-import com.yfaney.hear.TrialRunActivity.ToneThread;
 import com.yfaney.hear.R;
 
 import android.media.AudioFormat;
@@ -14,10 +12,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.SharedPreferences;
 import android.text.format.Time;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -37,10 +33,15 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 	private final static int SEND_CHANGE_DB_MESSAGE = 3;
 	
 	/* Temporary User Data */
+	//SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+	/*
 	final static String USER_FIRSTNAME = "Younghwan";
 	final static String USER_LASTNAME = "Jang";
 	final static String USER_USERID = "yfaney";
-	
+	*/
+	private String firstName = null;
+	private String lastName = null;
+	private String userID = null;
 	
 	/* Temporary User Data End */
 	int sampleRate = 12000;
@@ -73,7 +74,29 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
         /* Make Handler */
         mMainHandler = new SendMassgeHandler();
         
-	}
+        /* Get user info from preference */
+		SharedPreferences prefs = getSharedPreferences("UserInformation", Activity.MODE_PRIVATE);
+		firstName = prefs.getString("UserFirstName", "Default:Younghwan");
+		lastName = prefs.getString("UserLastName", "Default:Jang");
+		userID = prefs.getString("UserID", "Default:yfaney");
+
+		// Moved from R.id.buttonBeginScrng at onClick Start
+		RelativeLayout layout = (RelativeLayout)findViewById(R.id.layout_screening);
+		buttonBeginScrng.setVisibility(View.INVISIBLE);
+		for(int j=0; j<2;j++){
+			for(int i=0;i < freq.length; i++){
+				scrSet.add(new ScreeningTestSet(freq[i], (short)freq2deciBel[i], ToneThread.LEFT_EAR));
+				scrSet.add(new ScreeningTestSet(freq[i], (short)freq2deciBel[i], ToneThread.RIGHT_EAR));				
+			}
+		}
+		Collections.shuffle(scrSet);
+		layout.setBackgroundResource(R.color.red);
+		layout.setOnTouchListener(this);
+		testSetIdx = 0;
+		// Moved from R.id.buttonBeginScrng at onClick End
+
+    
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -86,9 +109,10 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 			// 이 부분은 특정 키를 눌렀을때 실행 된다.
 			// 만약 뒤로 버튼을 눌럿을때 할 행동을 지정하고 싶다면
 			if( KeyCode == KeyEvent.KEYCODE_BACK ){
-				mMainHandler.sendEmptyMessage(SEND_THREAD_STOP_MESSAGE);
+				if(mToneThread != null){
+					mMainHandler.sendEmptyMessage(SEND_THREAD_STOP_MESSAGE);
+				}
 				 //여기에 뒤로 버튼을 눌렀을때 해야할 행동을 지정한다
-				 
 				return super.onKeyDown( KeyCode, event );
 				// 여기서 리턴값이 중요한데; 리턴값이 true 이냐 false 이냐에 따라 행동이 달라진다.
 				// true 일경우 back 버튼의 기본동작인 종료를 실행하게 된다.
@@ -103,27 +127,10 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		RelativeLayout layout = (RelativeLayout)findViewById(R.id.layout_screening);
-		TextView textViewTesting =(TextView)findViewById(R.id.textViewScrngComplete);
-		// TODO Auto-generated method stub
 		switch(v.getId()){
 		case R.id.buttonBeginScrng:
-			Button buttonBeginScrng = (Button)findViewById(R.id.buttonBeginScrng);
-			textViewTesting.setText(getResources().getString(R.string.btn_scrningTesting));
-			buttonBeginScrng.setVisibility(View.INVISIBLE);
-			for(int j=0; j<2;j++){
-				for(int i=0;i < freq.length; i++){
-					scrSet.add(new ScreeningTestSet(freq[i], (short)freq2deciBel[i], ToneThread.LEFT_EAR));
-					scrSet.add(new ScreeningTestSet(freq[i], (short)freq2deciBel[i], ToneThread.RIGHT_EAR));				
-				}
-			}
-			Collections.shuffle(scrSet);
-			layout.setBackgroundResource(R.color.red);
-			layout.setOnTouchListener(this);
-			testSetIdx = 0;
 	        break;
 		case R.id.buttonExitToMain:
-			/* Write data into DB */
     		Intent resultIntent = new Intent();
     		//startActivity(intent);                                    // Activity 실행
     		setResult(Activity.RESULT_OK, resultIntent);
@@ -140,19 +147,27 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 		switch(v.getId()){
 		case R.id.layout_screening:
 			if(event.getAction() == MotionEvent.ACTION_DOWN){
+				// TODO Pressing Screening - Tone Play!
 				if (testSetIdx < scrSet.size()){
 					layout.setBackgroundResource(R.color.green);
+					/* ToneThread Constructor */
 					mToneThread = new ToneThread(sampleRate, scrSet.get(testSetIdx).getEarSide(), scrSet.get(testSetIdx).getFrequency(), scrSet.get(testSetIdx).getDeciBel());
 					mToneThread.start();
-					testSetIdx++;
 				}
 				else{
 				}
 			}
 			else if(event.getAction() == MotionEvent.ACTION_UP){
+				// TODO Releasing Screening - Tone Stop!
 				if (testSetIdx < scrSet.size()){
-					scrTestData.add(new TestDataModel(0, testSetIdx, mToneThread.get_ear_side(), (int)mToneThread.getSynth_frequency(), mToneThread.getdB()));
-		            Toast.makeText(this, "freq= "+scrTestData.get(scrTestData.size()-1).getFrequency()+"&dB="+scrTestData.get(scrTestData.size()-1).getDeciBel(), Toast.LENGTH_SHORT).show();
+					if(scrSet.get(testSetIdx).getDeciBel() == mToneThread.getdB()){
+						scrSet.add(new ScreeningTestSet(scrSet.get(testSetIdx).getFrequency(), (short) (scrSet.get(testSetIdx).getDeciBel() + 5), scrSet.get(testSetIdx).getEarSide()));
+			            Toast.makeText(this, "index increased= "+scrSet.size(), Toast.LENGTH_SHORT).show();
+					}
+					else{
+						scrTestData.add(new TestDataModel(0, testSetIdx, mToneThread.get_ear_side(), (int)mToneThread.getSynth_frequency(), mToneThread.getdB()));
+			            Toast.makeText(this, "idx= "+ testSetIdx +"&frq= "+scrTestData.get(scrTestData.size()-1).getFrequency()+"&dB="+scrTestData.get(scrTestData.size()-1).getDeciBel(), Toast.LENGTH_SHORT).show();
+					}
 					mMainHandler.sendEmptyMessage(SEND_THREAD_STOP_MESSAGE);
 					layout.setBackgroundResource(R.color.red);
 				}
@@ -161,22 +176,21 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 			    	Time now = new Time();
 			    	now.setToNow();
 					scrTestData.add(new TestDataModel(0, 0, mToneThread.get_ear_side(), (int)mToneThread.getSynth_frequency(), mToneThread.getdB()));
-					scrUserData.add(new ScreeningModel(0,USER_FIRSTNAME, USER_LASTNAME, USER_USERID, now.format("yyyy-MM-dd'T'HH:mm:ss")));
 					mMainHandler.sendEmptyMessage(SEND_THREAD_STOP_MESSAGE);
+					scrUserData.add(new ScreeningModel(0,firstName, lastName, userID, now.format("%Y-%m-%d %H:%M:%S")));
 					layout.setBackgroundResource(R.color.black);
 					layout.setOnTouchListener(null);
+					/* Write data into DB */
 					ScreeningSetDBManager dbManager = new ScreeningSetDBManager(this);
 					long setId = dbManager.insertUserData(scrUserData.get(0));
 					textViewTesting.setText(getResources().getString(R.string.btn_scrningComplete));
-					for(int i=1 ; i < scrTestData.size() ; i++){
-						//testResult += i + ": " + scrTestData.get(i).getDeciBel() + "/" + scrTestData.get(i).getFrequency() + " ";
+					for(int i=0 ; i < scrTestData.size() ; i++){
 						dbManager.insertData(scrTestData.get(i), setId);
 					}
-					//String testResult = "";
-					//textViewTesting.setText(testResult);
 			        Button buttonExitToMain = (Button)findViewById(R.id.buttonExitToMain);
 			        buttonExitToMain.setVisibility(View.VISIBLE);  // 화면에 안보임
 				}
+				testSetIdx++;
 			}
 			return true;
 		default:
@@ -219,7 +233,8 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 		short amplitute = 10000;	//Starts from 50db = 20*log(amp/1)
 		short dB = 50;
         private boolean isPlay = false;
-
+        
+        // ToneThread Constructor
         public ToneThread(int sample_Rate) {
         	this.sample_Rate = sample_Rate;
             isPlay = true;
@@ -232,6 +247,7 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
         	this.amplitute = (short) getAmplitute(dB);
             isPlay = true;
         }
+        /* Getter and Setter Start */
     	public float getSynth_frequency() {
 			return synth_frequency;
 		}
@@ -258,6 +274,7 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
                 isPlay = false;
         	}
         }
+        /* Getter and Setter End */
         @Override
         public void run() {
             super.run();
@@ -275,7 +292,7 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
     		float angle = 0;
     		while (isPlay && dB>-10){
     		    amplitute = (short)getAmplitute(dB);
-    		    for(int j=0;j<5;j++){
+    		    for(int j=0;(j<5) && isPlay;j++){
 	    			switch(ear_side){
 	    			case LEFT_EAR:
 	    			    for (int i = 0; i < buffer.length; i+=2){

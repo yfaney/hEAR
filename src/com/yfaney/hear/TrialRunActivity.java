@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -44,6 +45,20 @@ public class TrialRunActivity extends Activity implements OnClickListener, OnTou
         buttonBeginTrial.setOnClickListener(this);
         buttonBeginScrning.setOnClickListener(this);
         mMainHandler = new SendMassgeHandler();
+        
+        /* Volume Max! */
+        AudioManager audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC) , 0);
+        
+		// Moved from at R.id.buttonBeginTrial - onClick() Start
+		TextView textViewTesting =(TextView)findViewById(R.id.textViewTrialComplete);
+		// TODO Trial Starting
+		textViewTesting.setText(getResources().getString(R.string.btn_trialTesting));
+		buttonBeginTrial.setVisibility(View.INVISIBLE);
+		RelativeLayout layout = (RelativeLayout)findViewById(R.id.layout_trial_run);
+		layout.setBackgroundResource(R.color.red);
+		layout.setOnTouchListener(this);
+		// Moved from at R.id.buttonBeginTrial - onClick() End
 	}
     @Override
     protected void onResume() {
@@ -60,9 +75,10 @@ public class TrialRunActivity extends Activity implements OnClickListener, OnTou
 			// 이 부분은 특정 키를 눌렀을때 실행 된다.
 			// 만약 뒤로 버튼을 눌럿을때 할 행동을 지정하고 싶다면
 			if( KeyCode == KeyEvent.KEYCODE_BACK ){
-				mMainHandler.sendEmptyMessage(SEND_THREAD_STOP_MESSAGE);
+				if(mToneThread != null){
+					mMainHandler.sendEmptyMessage(SEND_THREAD_STOP_MESSAGE);
+				}
 				 //여기에 뒤로 버튼을 눌렀을때 해야할 행동을 지정한다
-				 
 				return super.onKeyDown( KeyCode, event );
 				// 여기서 리턴값이 중요한데; 리턴값이 true 이냐 false 이냐에 따라 행동이 달라진다.
 				// true 일경우 back 버튼의 기본동작인 종료를 실행하게 된다.
@@ -94,20 +110,11 @@ public class TrialRunActivity extends Activity implements OnClickListener, OnTou
 
 	@Override
 	public void onClick(View v) {
-		TextView textViewTesting =(TextView)findViewById(R.id.textViewTrialComplete);
-		// TODO Auto-generated method stub
 		switch(v.getId()){
 		case R.id.buttonBeginTrial:
-			Button buttonBeginTrial = (Button)findViewById(R.id.buttonBeginTrial);
-			textViewTesting.setText(getResources().getString(R.string.btn_trialTesting));
-			buttonBeginTrial.setVisibility(View.INVISIBLE);
-			RelativeLayout layout = (RelativeLayout)findViewById(R.id.layout_trial_run);
-			layout.setBackgroundResource(R.color.red);
-			layout.setOnTouchListener(this);
-			//mToneThread = new ToneThread(sampleRate, ToneThread.LEFT_EAR, frequency, (short)50);
-			//tonePlayer.playSound();
 	        break;
 		case R.id.buttonBeginScrning:
+			// TODO Move to Real Screening Page
     		Intent intent = new Intent(TrialRunActivity.this, ScreeningActivity.class); // 평범한 Intent 생성
     		//startActivity(intent);                                    // Activity 실행
     		startActivityForResult(intent, MainActivity.SUBJECTACTION);
@@ -128,10 +135,6 @@ public class TrialRunActivity extends Activity implements OnClickListener, OnTou
 					if(toneside == 1){
 						mToneThread = new ToneThread(sampleRate, ToneThread.LEFT_EAR, frequency, (short)50);
 						mToneThread.start();
-//						mMainHandler.sendMessage(mMainHandler.obtainMessage(SEND_CHANGE_EAR_MESSAGE, ToneThread.LEFT_EAR));
-//						mMainHandler.sendMessage(mMainHandler.obtainMessage(SEND_CHANGE_FREQ_MESSAGE, frequency));
-//						mMainHandler.sendMessage(mMainHandler.obtainMessage(SEND_CHANGE_DB_MESSAGE, 50));
-//						mMainHandler.sendEmptyMessage(SEND_THREAD_START_MESSAGE);
 						toneside--;
 					}
 					else{
@@ -139,8 +142,6 @@ public class TrialRunActivity extends Activity implements OnClickListener, OnTou
 						toneTestSound--;
 						mToneThread = new ToneThread(sampleRate, ToneThread.RIGHT_EAR, frequency, (short)50);
 						mToneThread.start();
-//						mMainHandler.sendMessage(mMainHandler.obtainMessage(SEND_CHANGE_EAR_MESSAGE, ToneThread.RIGHT_EAR));
-//						mMainHandler.sendEmptyMessage(SEND_THREAD_START_MESSAGE);
 						frequency -= 1000;
 					}
 				}
@@ -168,31 +169,6 @@ public class TrialRunActivity extends Activity implements OnClickListener, OnTou
 				}
 			}
 			return true;
-//			if(toneTestSound >= 1){
-//				layout.setBackgroundResource(R.color.red);
-//				layout.setBackgroundResource(R.color.green);
-//				frequency -= 88;
-//				//tonePlayer.playSound(frequency, sampleRate);
-//				if(toneside == 1){
-//					mMainHandler.sendMessage(mMainHandler.obtainMessage(SEND_CHANGE_EAR_MESSAGE, ToneThread.RIGHT_EAR));
-//					toneTestSound--;
-//					toneside--;
-//				}
-//				else{
-//					toneside = 1;
-//					mMainHandler.sendMessage(mMainHandler.obtainMessage(SEND_CHANGE_EAR_MESSAGE, ToneThread.LEFT_EAR));
-//					mMainHandler.sendMessage(mMainHandler.obtainMessage(SEND_CHANGE_FREQ_MESSAGE, frequency));
-//				}
-//			}
-//			else{
-//				//tonePlayer.stopSound();
-//				//tonePlayer.setPlay(false);
-//				layout.setBackgroundResource(R.color.black);
-//				textViewTesting.setText(getResources().getString(R.string.btn_scrningComplete));
-//		        Button buttonBeginScrning = (Button)findViewById(R.id.buttonBeginScrning);
-//		        buttonBeginScrning.setVisibility(View.VISIBLE);  // 화면에 안보임
-//			}
-		
 		default:
 		return false;
 		}
@@ -292,7 +268,7 @@ public class TrialRunActivity extends Activity implements OnClickListener, OnTou
     		float angle = 0;
     		while (isPlay && dB>-10){
     		    amplitute = (short)getAmplitute(dB);
-    		    for(int j=0;j<5;j++){
+    		    for(int j=0;(j<5) && isPlay;j++){
 	    			switch(ear_side){
 	    			case LEFT_EAR:
 	    			    for (int i = 0; i < buffer.length; i+=2){
@@ -329,7 +305,6 @@ public class TrialRunActivity extends Activity implements OnClickListener, OnTou
     		    }
     		    dB-=2;
 			}
-		    //Toast.makeText(getApplicationContext(), Integer.toString(dB), Toast.LENGTH_SHORT).show();
     		audioTrack.release();
         }
     	double getAmplitute(short dB){

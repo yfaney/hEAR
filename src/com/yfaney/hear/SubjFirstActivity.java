@@ -5,9 +5,11 @@ import com.yfaney.hear.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class SubjFirstActivity extends Activity {
 
@@ -26,6 +28,15 @@ public class SubjFirstActivity extends Activity {
         buttonSubjNext1.setOnClickListener( new Button.OnClickListener(){
         	@Override
 			public void onClick(View v) {
+        		EditText editTextSubjName1 = (EditText)findViewById(R.id.editTextSubjName1);
+        		EditText editTextSubjName2 = (EditText)findViewById(R.id.editTextSubjName2);
+        		EditText editTextSubjId = (EditText)findViewById(R.id.editTextSubjId);
+        		SharedPreferences prefs = getSharedPreferences("UserInformation", Activity.MODE_PRIVATE);
+        		SharedPreferences.Editor editor = prefs.edit();
+        		editor.putString("UserFirstName", editTextSubjName1.getText().toString());
+        		editor.putString("UserLastName", editTextSubjName2.getText().toString());
+        		editor.putString("UserID", editTextSubjId.getText().toString());
+        		editor.commit();
         		Intent intent = new Intent(SubjFirstActivity.this, BriefInstActivity.class); // 평범한 Intent 생성
         		//startActivity(intent);                                    // Activity 실행
         		startActivityForResult(intent, MainActivity.SUBJECTACTION);        	}

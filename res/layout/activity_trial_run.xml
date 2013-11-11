@@ -15,17 +15,16 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/buttonBeginTrial"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="60dp"
-        android:text="@string/txt_instruction1" />
+        android:text="@string/txt_instruction1"
+        android:textSize="0.15in" />
 
     <Button
         android:id="@+id/buttonBeginTrial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/buttonBeginScrning"
-        android:layout_alignParentRight="true"
+        android:layout_alignRight="@+id/buttonBeginScrning"
         android:layout_below="@+id/textViewTrialComplete"
-        android:layout_marginTop="24dp"
         android:text="@string/btn_beginTrial" />
 
     <Button
@@ -35,7 +34,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/buttonBeginTrial"
-        android:layout_marginTop="14dp"
         android:text="@string/btn_beginScrning" />
 
 </RelativeLayout>
