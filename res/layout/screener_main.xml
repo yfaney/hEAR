@@ -9,6 +9,7 @@
     tools:context=".ScreenerActivity" >
 
     <Button
+        style="@style/ScreenerMainButtonStyle"
         android:id="@+id/buttonScrLogIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,6 +20,7 @@
         android:text="@string/btn_login" />
 
     <Button
+        style="@style/ScreenerMainButtonStyle"
         android:id="@+id/buttonAddNewScrnr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

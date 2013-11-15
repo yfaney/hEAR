@@ -14,6 +14,7 @@
     <string name="title_activity_subj_list">Subject List</string>
     <string name="title_activity_subj_graph">Graph</string>
     <string name="title_activity_new_screener">Add New Screener</string>
+    <string name="txt_organization">Organization</string>
     <string name="txt_firstName">First Name</string>
     <string name="txt_lastName">Last Name</string>
     <string name="txt_name">Name</string>
@@ -33,6 +34,7 @@
     <string name="btn_screener">Screener</string>
     <string name="btn_Next">Next</string>
 	<string name="btn_Back">Back</string>
+	<string name="btn_Submit">Submit</string>
 	<string name="btn_beginTrial">Touch to begin Trial</string>
     <string name="btn_beginScrning">Touch to begin Screening</string>
     <string name="btn_trialStart">Touch and keep touching the screen anywhere to hear the tone sounds. You can go back with press back button on your phone.</string>
@@ -47,5 +49,6 @@
     <string name="menu_action">Select Action</string>
     <string name="menu_edit">Edit</string>
 	<string name="menu_delete">Delete</string>
-    	
+    <string name="list_noresult">No Result</string>
+		
 </resources>

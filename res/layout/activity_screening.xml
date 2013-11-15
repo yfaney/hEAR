@@ -10,6 +10,7 @@
     tools:context=".ScreeningActivity" >
 
     <Button
+        style="@style/ScreeningButtonStyle"
         android:id="@+id/buttonBeginScrng"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,6 +20,7 @@
         android:text="@string/btn_beginScrning" />
 
     <Button
+        style="@style/ScreeningButtonStyle"
         android:id="@+id/buttonExitToMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,12 +30,12 @@
         android:text="@string/btn_exitToMain" />
 
     <TextView
+        style="@style/ScreeningTextStyle"
         android:id="@+id/textViewScrngComplete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/buttonBeginScrng"
         android:layout_alignParentTop="true"
-        android:text="@string/txt_scrningStart"
-        android:textSize="0.15in" />
+        android:text="@string/txt_scrningStart" />
 
 </RelativeLayout>

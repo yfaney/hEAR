@@ -22,6 +22,77 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">16dp</item>
+	    <item name="android:textSize">0.15in</item>
     </style>
 
+    <!-- Main Activity Style -->
+    <style name="MainButtonStyle">
+	    <item name="android:textSize">0.2in</item>
+	</style>
+    <!-- Admin Activity Style -->
+    <style name="Admin_ButtonStyle">
+	    <item name="android:textSize">0.2in</item>
+	</style>
+    <style name="Admin_TextStyle">
+	    <item name="android:textSize">0.15in</item>
+    </style>
+    <!-- Subject-Main Activity Style -->
+    <style name="SubjectFirstButtonStyle">
+	    <item name="android:textSize">0.2in</item>
+	</style>
+    <style name="SubjectFirstTextStyle">
+	    <item name="android:textSize">0.15in</item>
+	</style>
+    <!-- Brief-Instruction Activity Style -->
+    <style name="BriefInstructionButtonStyle">
+	    <item name="android:textSize">0.2in</item>
+	</style>
+    <style name="BriefInstructionTextStyle">
+	    <item name="android:textSize">0.15in</item>
+	</style>
+    <!-- Trial Activity Style -->
+    <style name="TrialButtonStyle">
+	    <item name="android:textSize">0.2in</item>
+	</style>
+    <style name="TrialTextStyle">
+	    <item name="android:textSize">0.15in</item>
+	</style>
+    <!-- Screening Activity Style -->
+    <style name="ScreeningButtonStyle">
+	    <item name="android:textSize">0.2in</item>
+	</style>
+    <style name="ScreeningTextStyle">
+	    <item name="android:textSize">0.15in</item>
+	</style>
+	
+    <!-- Screener-Main Activity Style -->
+    <style name="ScreenerMainButtonStyle">
+	    <item name="android:textSize">0.2in</item>
+	</style>
+    <style name="ScreenerMainTextStyle">
+	    <item name="android:textSize">0.15in</item>
+	</style>
+    <!-- Screener-New Activity Style -->
+    <style name="ScreenerNewButtonStyle">
+	    <item name="android:textSize">0.2in</item>
+	</style>
+    <style name="ScreenerNewTextStyle">
+	    <item name="android:textSize">0.15in</item>
+	</style>
+	
+    <!-- Subject-List Activity Style -->
+    <style name="SubjectListButtonStyle">
+	    <item name="android:textSize">0.2in</item>
+	</style>
+    <style name="SubjectListTextStyle">
+	    <item name="android:textSize">0.15in</item>
+	</style>
+    <!-- Subject-Graph Activity Style -->
+    <style name="SubjectGraphButtonStyle">
+	    <item name="android:textSize">0.2in</item>
+	</style>
+    <style name="SubjectGraphTextStyle">
+	    <item name="android:textSize">0.15in</item>
+	</style>
+    	
 </resources>

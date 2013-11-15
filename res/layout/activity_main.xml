@@ -9,19 +9,19 @@
     tools:context=".MainActivity" >
 
     <Button
+        style="@style/MainButtonStyle"
         android:id="@+id/buttonSubj"
         android:layout_width="wrap_content"
         android:layout_height="150dip"
-        android:textSize="0.2in"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:text="@string/btn_subject" />
 
     <Button
+        style="@style/MainButtonStyle"
         android:id="@+id/buttonScr"
         android:layout_width="wrap_content"
         android:layout_height="150dip"
-        android:textSize="0.2in"
         android:layout_alignLeft="@+id/buttonSubj"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/buttonSubj"

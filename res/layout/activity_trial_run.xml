@@ -10,15 +10,16 @@
     tools:context=".TrialRunActivity" >
 
     <TextView
+        style="@style/TrialTextStyle"
         android:id="@+id/textViewTrialComplete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/buttonBeginTrial"
         android:layout_alignParentTop="true"
-        android:text="@string/txt_instruction1"
-        android:textSize="0.15in" />
+        android:text="@string/txt_instruction1" />
 
     <Button
+        style="@style/TrialButtonStyle"
         android:id="@+id/buttonBeginTrial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,6 +29,7 @@
         android:text="@string/btn_beginTrial" />
 
     <Button
+        style="@style/TrialButtonStyle"
         android:id="@+id/buttonBeginScrning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

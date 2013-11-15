@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="First Name" />
+        android:text="@string/txt_firstName" />
 
     <EditText
         android:id="@+id/editTextAdmName1"
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editTextAdmName1"
         android:layout_below="@+id/editTextAdmName1"
-        android:text="Last Name" />
+        android:text="@string/txt_lastName" />
 
     <EditText
         android:id="@+id/editTextAdmName2"
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editTextAdmName2"
         android:layout_below="@+id/editTextAdmName2"
-        android:text="Organization" />
+        android:text="@string/txt_organization" />
 
     <EditText
         android:id="@+id/editTextAdmOrg"
@@ -59,7 +59,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView3"
         android:layout_below="@+id/textView3"
-        android:ems="10" />
+        android:ems="10"
+        android:inputType="text" />
 
     <TextView
         android:id="@+id/textView4"
@@ -67,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editTextAdmOrg"
         android:layout_below="@+id/editTextAdmOrg"
-        android:text="e-Mail Address" />
+        android:text="@string/txt_emailAdr" />
 
     <EditText
         android:id="@+id/editTextAdmEmail"
@@ -84,7 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editTextAdmEmail"
         android:layout_below="@+id/editTextAdmEmail"
-        android:text="User Name" />
+        android:text="@string/txt_userId" />
 
     <EditText
         android:id="@+id/editTextAdmUserName"
@@ -92,7 +93,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView5"
         android:layout_below="@+id/textView5"
-        android:ems="10" />
+        android:ems="10"
+        android:inputType="text" />
 
     <TextView
         android:id="@+id/textView6"
@@ -100,7 +102,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editTextAdmUserName"
         android:layout_below="@+id/editTextAdmUserName"
-        android:text="Password" />
+        android:text="@string/txt_userPw" />
 
     <EditText
         android:id="@+id/editTextAdmPasswd"
@@ -112,11 +114,12 @@
         android:inputType="textPassword" />
 
     <Button
+        style="@style/Admin_ButtonStyle"
         android:id="@+id/buttonSubjNext1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editTextAdmPasswd"
         android:layout_below="@+id/editTextAdmPasswd"
-        android:text="Submit" />
+        android:text="@string/btn_Submit" />
 
 </RelativeLayout>

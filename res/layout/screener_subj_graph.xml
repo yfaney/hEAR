@@ -10,6 +10,7 @@
     tools:context=".SubjGraphActivity" >
 
     <Button
+        style="@style/SubjectGraphButtonStyle"
         android:id="@+id/buttonEmailToAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,6 +20,7 @@
         android:text="e-Mail to Admin" />
 
     <Button
+        style="@style/SubjectGraphButtonStyle"
         android:id="@+id/buttonSubjExport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

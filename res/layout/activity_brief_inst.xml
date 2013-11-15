@@ -9,27 +9,26 @@
     tools:context=".BriefInstActivity" >
 
     <TextView
+        style="@style/BriefInstructionTextStyle"
         android:id="@+id/textViewTrialComplete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:textSize="0.15in"
-        android:text="@string/txt_instruction1"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:text="@string/txt_instruction1" />
 
     <TextView
+        style="@style/BriefInstructionTextStyle"
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textViewTrialComplete"
         android:layout_below="@+id/textViewTrialComplete"
         android:layout_marginTop="33dp"
-        android:textSize="0.15in"
-        android:text="@string/txt_instruction2"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:text="@string/txt_instruction2" />
 
     <Button
+        style="@style/BriefInstructionButtonStyle"
         android:id="@+id/buttonBeginTrial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
