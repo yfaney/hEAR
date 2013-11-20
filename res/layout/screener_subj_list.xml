@@ -12,6 +12,7 @@
         android:id="@+id/listViewSubject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonSubjExport"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true" >
@@ -27,5 +28,23 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:text="@string/list_noresult" />
+
+    <Button
+        android:id="@+id/buttonSubjExport"
+        style="@style/SubjectListButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/btn_export_csv" />
+
+    <Button
+        android:id="@+id/buttonEmailToAdmin"
+        style="@style/SubjectListButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/btn_send_to_admin" />
 
 </RelativeLayout>

@@ -9,24 +9,5 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".SubjGraphActivity" >
 
-    <Button
-        style="@style/SubjectGraphButtonStyle"
-        android:id="@+id/buttonEmailToAdmin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="21dp"
-        android:text="e-Mail to Admin" />
-
-    <Button
-        style="@style/SubjectGraphButtonStyle"
-        android:id="@+id/buttonSubjExport"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/buttonEmailToAdmin"
-        android:layout_alignBottom="@+id/buttonEmailToAdmin"
-        android:layout_alignParentLeft="true"
-        android:text="Export to file" />
 
 </RelativeLayout>

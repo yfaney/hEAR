@@ -16,10 +16,19 @@ public class BriefInstActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_brief_inst);
         Button buttonBeginTrial = (Button)findViewById(R.id.buttonBeginTrial);
+        Button buttonSkipTrial = (Button)findViewById(R.id.buttonSkipTrial);
         buttonBeginTrial.setOnClickListener( new Button.OnClickListener(){
         	@Override
 			public void onClick(View v) {
         		Intent intent = new Intent(BriefInstActivity.this, TrialRunActivity.class); // 평범한 Intent 생성
+        		//startActivity(intent);                                    // Activity 실행
+        		startActivityForResult(intent, MainActivity.SUBJECTACTION);
+        	}
+        });
+        buttonSkipTrial.setOnClickListener( new Button.OnClickListener(){
+        	@Override
+			public void onClick(View v) {
+        		Intent intent = new Intent(BriefInstActivity.this, ScreeningActivity.class); // 평범한 Intent 생성
         		//startActivity(intent);                                    // Activity 실행
         		startActivityForResult(intent, MainActivity.SUBJECTACTION);
         	}

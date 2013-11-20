@@ -162,11 +162,11 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 				if (testSetIdx < scrSet.size()){
 					if(scrSet.get(testSetIdx).getDeciBel() == mToneThread.getdB()){
 						scrSet.add(new ScreeningTestSet(scrSet.get(testSetIdx).getFrequency(), (short) (scrSet.get(testSetIdx).getDeciBel() + 5), scrSet.get(testSetIdx).getEarSide()));
-			            Toast.makeText(this, "index increased= "+scrSet.size(), Toast.LENGTH_SHORT).show();
+			            //Toast.makeText(this, "index increased= "+scrSet.size(), Toast.LENGTH_SHORT).show();
 					}
 					else{
 						scrTestData.add(new TestDataModel(0, testSetIdx, mToneThread.get_ear_side(), (int)mToneThread.getSynth_frequency(), mToneThread.getdB()));
-			            Toast.makeText(this, "idx= "+ testSetIdx +"&frq= "+scrTestData.get(scrTestData.size()-1).getFrequency()+"&dB="+scrTestData.get(scrTestData.size()-1).getDeciBel(), Toast.LENGTH_SHORT).show();
+			            //Toast.makeText(this, "idx= "+ testSetIdx +"&frq= "+scrTestData.get(scrTestData.size()-1).getFrequency()+"&dB="+scrTestData.get(scrTestData.size()-1).getDeciBel(), Toast.LENGTH_SHORT).show();
 					}
 					mMainHandler.sendEmptyMessage(SEND_THREAD_STOP_MESSAGE);
 					layout.setBackgroundResource(R.color.red);

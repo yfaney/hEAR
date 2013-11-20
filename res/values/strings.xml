@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">hEAR v0.75</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">hEAR v0.80</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_admin">Administrator Setup</string>
     <string name="title_activity_screener_login">Screener Login</string>
@@ -30,13 +29,17 @@
     <string name="txt_scrningStart">Now you can hear several tone sounds with pressing the screen. Please see the instructions below.<br/>
 * Press the screen so that tone will start, release screen when you cannot hear tone.<br/>
 * Repeat until test is completed</string>
+    <string name="txt_delete_confirm">All data will be deleted. It cannot be covered. Would you continue?</string>
     <string name="btn_subject">Subject</string>
     <string name="btn_screener">Screener</string>
     <string name="btn_Next">Next</string>
 	<string name="btn_Back">Back</string>
+    <string name="btn_Delete">Delete</string>
+	<string name="btn_Cancel">Cancel</string>
 	<string name="btn_Submit">Submit</string>
 	<string name="btn_beginTrial">Touch to begin Trial</string>
     <string name="btn_beginScrning">Touch to begin Screening</string>
+    <string name="btn_skiptoScrning">I do not need trial. Let me go to screening.</string>
     <string name="btn_trialStart">Touch and keep touching the screen anywhere to hear the tone sounds. You can go back with press back button on your phone.</string>
     <string name="btn_trialTesting">The tone changes with clicking background</string>
     <string name="btn_trialComplete">Trial Complete</string>
@@ -46,6 +49,8 @@
     <string name="btn_login">Log In</string>
     <string name="btn_newScreener">Add New Screener</string>
     <string name="btn_register">Register</string>
+    <string name="btn_export_csv">Export to file</string>
+    <string name="btn_send_to_admin">e-Mail to Admin</string>
     <string name="menu_action">Select Action</string>
     <string name="menu_edit">Edit</string>
 	<string name="menu_delete">Delete</string>

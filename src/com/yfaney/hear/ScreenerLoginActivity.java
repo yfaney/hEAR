@@ -28,7 +28,7 @@ public class ScreenerLoginActivity extends Activity {
 	 * TODO: remove after connecting to a real authentication system.
 	 */
 	private static final String[] DUMMY_CREDENTIALS = new String[] {
-			"foo@example.com:hello", "bar@example.com:world" };
+			"foo@example.com:hello", "bar@example.com:world", "yfaney:12345" };
 
 	/**
 	 * The default email to populate the email field with.
@@ -56,10 +56,9 @@ public class ScreenerLoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_screener_login);
-
 		// Set up the login form.
 		mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
-		mEmailView = (EditText) findViewById(R.id.username);
+		mEmailView = (EditText) findViewById(R.id.userID);
 		mEmailView.setText(mEmail);
 
 		mPasswordView = (EditText) findViewById(R.id.password);
@@ -84,10 +83,7 @@ public class ScreenerLoginActivity extends Activity {
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						//attemptLogin();
-		        		Intent intent = new Intent(ScreenerLoginActivity.this, SubjListActivity.class); // 평범한 Intent 생성
-		        		//startActivity(intent);                                    // Activity 실행
-		        		startActivityForResult(intent, MainActivity.SCREENERACTION);
+						attemptLogin();
 					}
 				});
 	}
@@ -119,7 +115,7 @@ public class ScreenerLoginActivity extends Activity {
 
 		boolean cancel = false;
 		View focusView = null;
-
+		/*
 		// Check for a valid password.
 		if (TextUtils.isEmpty(mPassword)) {
 			mPasswordView.setError(getString(R.string.error_field_required));
@@ -140,7 +136,7 @@ public class ScreenerLoginActivity extends Activity {
 			mEmailView.setError(getString(R.string.error_invalid_email));
 			focusView = mEmailView;
 			cancel = true;
-		}
+		}*/
 
 		if (cancel) {
 			// There was an error; don't attempt login and focus the first
@@ -208,11 +204,11 @@ public class ScreenerLoginActivity extends Activity {
 
 			try {
 				// Simulate network access.
-				Thread.sleep(2000);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				return false;
 			}
-
+			/* Dummy Authentication
 			for (String credential : DUMMY_CREDENTIALS) {
 				String[] pieces = credential.split(":");
 				if (pieces[0].equals(mEmail)) {
@@ -220,7 +216,9 @@ public class ScreenerLoginActivity extends Activity {
 					return pieces[1].equals(mPassword);
 				}
 			}
-
+			*/
+			/* Real Authentication Start */
+			/* Real Authentication End */
 			// TODO: register the new account here.
 			return true;
 		}
@@ -231,6 +229,11 @@ public class ScreenerLoginActivity extends Activity {
 			showProgress(false);
 
 			if (success) {
+        		Intent intent = new Intent(ScreenerLoginActivity.this, SubjListActivity.class); // 평범한 Intent 생성
+        		intent.putExtra("UserID", mEmail);
+        		//startActivity(intent);                                    // Activity 실행
+        		startActivityForResult(intent, MainActivity.SCREENERACTION);
+
 				finish();
 			} else {
 				mPasswordView

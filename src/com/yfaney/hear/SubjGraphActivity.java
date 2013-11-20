@@ -13,18 +13,18 @@ import com.jjoe64.graphview.LineGraphView;
 import com.yfaney.hear.R;
 import com.yfaney.hear.ScreeningActivity.ToneThread;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Point;
 import android.view.Display;
-import android.view.Menu;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
-public class SubjGraphActivity extends Activity implements OnClickListener{
+public class SubjGraphActivity extends Activity {
     Button buttonSubjExport = null;
     Button buttonEmailToAdmin = null;
 	@Override
@@ -58,9 +58,9 @@ public class SubjGraphActivity extends Activity implements OnClickListener{
 	    );  
 	    graphView.setGraphViewStyle(new GraphViewStyle(0xFF000055,0xFF000055,0xFF000000));
 	    //graphView.setManualYAxisBounds(90.0, -10.0);
-	    Display display = getWindowManager().getDefaultDisplay(); 
-	    int width = display.getWidth();  // deprecated
-	    int height = display.getHeight();  // deprecated
+	    int dimension[] = getWidthHeight();
+	    int height = dimension[1];  // deprecated
+	
 	    graphView.setLayoutParams(new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height-400));
         //Toast.makeText(this, Double.toString(graphView.getMaxY()), Toast.LENGTH_SHORT).show();
 	    graphView.addSeries(leftSeries); // data  
@@ -71,32 +71,37 @@ public class SubjGraphActivity extends Activity implements OnClickListener{
 	    graphView.setLegendWidth(150);
 	    RelativeLayout layout = (RelativeLayout) findViewById(R.id.graphLayout);  
 	    layout.addView(graphView); 
-	    Button buttonSubjExport = (Button)findViewById(R.id.buttonSubjExport);
-	    Button buttonEmailToAdmin = (Button)findViewById(R.id.buttonEmailToAdmin);
-	    buttonSubjExport.setOnClickListener(this);
-	    buttonEmailToAdmin.setOnClickListener(this);
 	}
-
+/*	I don't need a menu until now
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.subj_graph, menu);
 		return true;
+	}*/
+	@SuppressWarnings("deprecation")
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+	public int[] getWidthHeight(){
+	    Display display = getWindowManager().getDefaultDisplay();
+		int dimension[] = new int[2];
+	    if(android.os.Build.VERSION.SDK_INT >= 13){
+	    	Point size = new Point();
+	    	display.getSize(size);
+	    	dimension[0] = size.x;
+	    	dimension[1] = size.y;
+	    }
+	    else{
+	    	dimension[0] = display.getWidth();
+	    	dimension[1] = display.getHeight();
+	    }
+		return dimension;
+		
 	}
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		switch(v.getId()){
-		case R.id.buttonSubjExport:
-
-			//mToneThread = new ToneThread(sampleRate, ToneThread.LEFT_EAR, frequency, (short)50);
-			//tonePlayer.playSound();
-	        break;
-		case R.id.buttonEmailToAdmin:
-
-	        break;
-    	}
-    }
+	public int getHeight(){
+		return 0;
+		
+	}
+	
 	public class CustomComparator implements Comparator<TestDataModel> {
 	    @Override
 	    public int compare(TestDataModel o1, TestDataModel o2) {
