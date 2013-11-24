@@ -16,7 +16,7 @@ public class ScreenerActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.screener_main);
 		Button buttonScrLogIn = (Button)findViewById(R.id.buttonScrLogIn);
-		Button buttonAddNewScrnr = (Button)findViewById(R.id.buttonAddNewScrnr);
+		Button buttonManageScrnr = (Button)findViewById(R.id.buttonManageScrnr);
 		buttonScrLogIn.setOnClickListener( new Button.OnClickListener(){
         	@Override
 			public void onClick(View v) {
@@ -24,7 +24,7 @@ public class ScreenerActivity extends Activity {
         		//startActivity(intent);                                    // Activity 실행
         		startActivityForResult(intent, MainActivity.SCREENERACTION);        	}
         });
-        buttonAddNewScrnr.setOnClickListener( new Button.OnClickListener(){
+		buttonManageScrnr.setOnClickListener( new Button.OnClickListener(){
         	@Override
 			public void onClick(View v) {
         		Intent intent = new Intent(ScreenerActivity.this, NewScreenerActivity.class); // 평범한 Intent 생성

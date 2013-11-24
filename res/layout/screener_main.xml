@@ -21,13 +21,13 @@
 
     <Button
         style="@style/ScreenerMainButtonStyle"
-        android:id="@+id/buttonAddNewScrnr"
+        android:id="@+id/buttonManageScrnr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/buttonScrLogIn"
         android:layout_marginTop="69dp"
-        android:text="@string/btn_newScreener" />
+        android:text="@string/btn_manageScreener" />
 
 </RelativeLayout>

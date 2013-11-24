@@ -9,7 +9,7 @@
     tools:context=".AdminActivity" >
 
     <TextView
-        android:id="@+id/textViewTrialComplete"
+        android:id="@+id/textViewAdmName1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -20,8 +20,8 @@
         android:id="@+id/editTextAdmName1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textViewTrialComplete"
-        android:layout_below="@+id/textViewTrialComplete"
+        android:layout_alignLeft="@+id/textViewAdmName1"
+        android:layout_below="@+id/textViewAdmName1"
         android:ems="10"
         android:inputType="textPersonName" >
 
@@ -88,7 +88,7 @@
         android:text="@string/txt_userId" />
 
     <EditText
-        android:id="@+id/editTextAdmUserName"
+        android:id="@+id/editTextAdmUserId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView5"
@@ -100,8 +100,8 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editTextAdmUserName"
-        android:layout_below="@+id/editTextAdmUserName"
+        android:layout_alignLeft="@+id/editTextAdmUserId"
+        android:layout_below="@+id/editTextAdmUserId"
         android:text="@string/txt_userPw" />
 
     <EditText

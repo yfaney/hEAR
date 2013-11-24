@@ -15,10 +15,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="@string/txt_name" />
+        android:text="@string/txt_firstName" />
 
     <EditText
-        android:id="@+id/editTextNewScrnrName"
+        android:id="@+id/editTextNewScrnrFirstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -35,17 +35,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editTextNewScrnrName"
-        android:text="@string/txt_userId" />
+        android:layout_below="@+id/editTextNewScrnrFirstName"
+        android:text="@string/txt_lastName" />
 
     <EditText
-        android:id="@+id/editTextNewUserName"
+        android:id="@+id/editTextNewLastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView2"
         android:ems="10"
-        android:inputType="text" />
+        android:inputType="textPersonName" />
 
     <TextView
         style="@style/ScreenerNewTextStyle"
@@ -53,17 +53,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editTextNewUserName"
-        android:text="@string/txt_userPw" />
+        android:layout_below="@+id/editTextNewLastName"
+        android:text="@string/txt_userId" />
 
     <EditText
-        android:id="@+id/editTextNewUserPw"
+        android:id="@+id/editTextNewUserId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView3"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:inputType="text" />
 
     <Button
         style="@style/ScreenerNewButtonStyle"
@@ -71,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editTextNewUserPw"
+        android:layout_below="@+id/editTextNewUserId"
         android:text="@string/btn_register" />
 
 </RelativeLayout>

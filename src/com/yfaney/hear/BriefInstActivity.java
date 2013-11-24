@@ -2,14 +2,20 @@ package com.yfaney.hear;
 
 import com.yfaney.hear.R;
 
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class BriefInstActivity extends Activity {
+public class BriefInstActivity extends Activity implements OnClickListener, DialogInterface.OnClickListener{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -17,22 +23,8 @@ public class BriefInstActivity extends Activity {
 		setContentView(R.layout.activity_brief_inst);
         Button buttonBeginTrial = (Button)findViewById(R.id.buttonBeginTrial);
         Button buttonSkipTrial = (Button)findViewById(R.id.buttonSkipTrial);
-        buttonBeginTrial.setOnClickListener( new Button.OnClickListener(){
-        	@Override
-			public void onClick(View v) {
-        		Intent intent = new Intent(BriefInstActivity.this, TrialRunActivity.class); // 평범한 Intent 생성
-        		//startActivity(intent);                                    // Activity 실행
-        		startActivityForResult(intent, MainActivity.SUBJECTACTION);
-        	}
-        });
-        buttonSkipTrial.setOnClickListener( new Button.OnClickListener(){
-        	@Override
-			public void onClick(View v) {
-        		Intent intent = new Intent(BriefInstActivity.this, ScreeningActivity.class); // 평범한 Intent 생성
-        		//startActivity(intent);                                    // Activity 실행
-        		startActivityForResult(intent, MainActivity.SUBJECTACTION);
-        	}
-        });
+        buttonBeginTrial.setOnClickListener(this);
+        buttonSkipTrial.setOnClickListener(this);
 	}
 
 	@Override
@@ -57,5 +49,61 @@ public class BriefInstActivity extends Activity {
 	      break; 
 	    } 
 	  } 
+	}
+
+	@Override
+	public void onClick(DialogInterface dialog, int which) {
+		// TODO Auto-generated method stub
+		switch(which) {
+		case DialogInterface.BUTTON_POSITIVE:
+			// TODO Auto-generated method stub
+			break;
+		case DialogInterface.BUTTON_NEGATIVE:
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch(v.getId()){
+		case R.id.buttonBeginTrial:
+            if(ifEarphoneConnectedOrAlert()){
+        		Intent intent = new Intent(BriefInstActivity.this, TrialRunActivity.class); // 평범한 Intent 생성
+        		//startActivity(intent);                                    // Activity 실행
+        		startActivityForResult(intent, MainActivity.SUBJECTACTION);
+    			//mToneThread = new ToneThread(sampleRate, ToneThread.LEFT_EAR, frequency, (short)50);
+    			//tonePlayer.playSound();
+            }
+            else{
+            }
+	        break;
+		case R.id.buttonSkipTrial:
+            if(ifEarphoneConnectedOrAlert()){
+        		Intent intent = new Intent(BriefInstActivity.this, ScreeningActivity.class); // 평범한 Intent 생성
+        		//startActivity(intent);                                    // Activity 실행
+        		startActivityForResult(intent, MainActivity.SUBJECTACTION);
+            }
+            else{
+            }
+	        break;
+    	}
+    }
+	
+	@SuppressWarnings("deprecation")
+	public boolean ifEarphoneConnectedOrAlert(){
+        AudioManager audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+        if(audioManager.isWiredHeadsetOn()){
+        	return true;
+        }
+        else{
+            Builder dlg= new AlertDialog.Builder(BriefInstActivity.this);
+            dlg.setTitle("Earphone is not detected")
+            .setMessage(R.string.txt_unplug_confirm)
+            .setIcon(R.drawable.headphone)
+            .setPositiveButton(R.string.btn_Back, this)
+            .setNegativeButton(R.string.btn_ProceedAnyway, this)
+            .show();
+    		return false;
+        }
 	}
 }
