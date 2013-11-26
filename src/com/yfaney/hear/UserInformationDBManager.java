@@ -68,8 +68,8 @@ public class UserInformationDBManager {
             		+ "FirstName text, "
                     + "LastName text, "
                     + "UserID text, "
-                    + "deciBel integer, "
-                    + "earSide integer)";
+                    + "Password text, "
+                    + "CreatedOn text)";
             arg0.execSQL(createSql);
             Toast.makeText(context, "DB is opened", Toast.LENGTH_SHORT).show();
         }
@@ -80,51 +80,54 @@ public class UserInformationDBManager {
         }
     }
     // 데이터 추가
-    public long insertUserData(ScreeningModel model) {
+    public long insertUserData(UserInformationModel model) {
     	ContentValues newValues = new ContentValues();
     	newValues.put("FirstName", model.getFirstName());
     	newValues.put("LastName", model.getLastName());
     	newValues.put("UserID", model.getUserId());
+    	newValues.put("Password", model.getPassWord());
+    	newValues.put("CreatedOn", model.getCreatedOn());
+    	return db.insert(tableName2, null, newValues);
+    }
+    public long insertAdminData(UserAdminInfoModel model) {
+    	ContentValues newValues = new ContentValues();
+    	newValues.put("FirstName", model.getFirstName());
+    	newValues.put("LastName", model.getLastName());
+    	newValues.put("Organization", model.getOrganization());
+    	newValues.put("EmailAddress", model.getEmailAddress());
+    	newValues.put("UserID", model.getUserId());
+    	newValues.put("Password", model.getUserId());
     	newValues.put("CreatedOn", model.getCreatedOn());
     	return db.insert(tableName, null, newValues);
     }
-    // 데이터 추가
-    public long insertData(TestDataModel testset, long setId) {
-    	ContentValues newValues = new ContentValues();
-    	newValues.put("setID", setId);
-    	newValues.put("Frequency", testset.getFrequency());
-    	newValues.put("deciBel", testset.getDeciBel());
-    	newValues.put("earSide", testset.getEarSide());
-    	return db.insert(tableName2, null, newValues);
-    }
- 
+    
     // 데이터 갱신
-    public void updateUserData(ScreeningModel model, int index) {
-        String sql = "update " + tableName + " set "
+    public void updateUserData(UserInformationModel model, int index) {
+        String sql = "update " + tableName2 + " set "
         		+ "FirstName = '" + model.getFirstName()
-                + "', LastName = " + model.getLastName()
+                + "', LastName = '" + model.getLastName()
                 + ", UserID = '" + model.getUserId()
+                + ", Password = '" + model.getPassWord()
                 + ", CreatedOn = '" + model.getCreatedOn()
                 + "' where id = " + index + ";";
         db.execSQL(sql);
     }
-    public void updateData(TestDataModel testset, int index) {
-        String sql = "update " + tableName2 + " set "
-        		+ "Frequency = '" + testset.getFrequency()
-                + "', deciBel = " + testset.getDeciBel()
-                + ", earSide = '" + testset.getEarSide()
-                + "' where id = " + index
-                + ";";
+    public void updateAdminData(UserAdminInfoModel model, int index) {
+        String sql = "update " + tableName + " set "
+        		+ "FirstName = '" + model.getFirstName()
+                + "', LastName = '" + model.getLastName()
+                + "', Organization = '" + model.getOrganization()
+                + "', EmailAddress = '" + model.getEmailAddress()
+                + ", UserID = '" + model.getUserId()
+                + ", Password = '" + model.getPassWord()
+                + ", CreatedOn = '" + model.getCreatedOn()
+                + "' where id = " + index + ";";
         db.execSQL(sql);
     }
 
     // 데이터 삭제
     public void removeUserData(int index) {
-        String sql = "delete from " + tableName + " where id = " + index + ";";
-        db.execSQL(sql);
-    }
-    public void removeDatas(int setID) {
-        String sql = "delete from " + tableName2 + " where setID = " + setID + ";";
+        String sql = "delete from " + tableName2 + " where id = " + index + ";";
         db.execSQL(sql);
     }
     public void removeAll() {
@@ -132,99 +135,48 @@ public class UserInformationDBManager {
         db.execSQL(sql);
     }
     // 단일 데이터 검색
-    public TestDataModel selectTestData(int index) {
+    public UserInformationModel selectUserData(int index) {
         String sql = "select * from " + tableName2 + " where id = " + index
                 + ";";
         Cursor result = db.rawQuery(sql, null);
  
         // result(Cursor 객체)가 비어 있으면 false 리턴
         if (result.moveToFirst()) {
-        	TestDataModel info = new TestDataModel(result.getInt(0), result.getInt(1), result.getInt(2), result.getInt(3),
-                    result.getShort(4));
+        	UserInformationModel info = new UserInformationModel(result.getInt(0) , result.getString(1),
+        			result.getString(2),
+        			result.getString(3),
+        			result.getString(4),
+        			result.getString(5));
             result.close();
             return info;
         }
         result.close();
         return null;
     }
-    public ScreeningModel selectSingleUser(int index) {
-        String sql = "select * from " + tableName + " where id = " + index + ";";
-        Cursor results = db.rawQuery(sql, null);
- 
-        results.moveToFirst();
- 
-        if (results.moveToFirst()) {
-        	ScreeningModel testset = new ScreeningModel(results.getInt(0), results.getString(1), results.getString(2),
-                    results.getString(3), results.getString(4));
-            results.close();
-            return testset;
-        }
-        results.close();
-        return null;
-    }
-    /**
-     * 특정 세트의 결과 데이터 선택
-     * @param setID
-     * @return
-     */
-    public ArrayList<TestDataModel> selectTestDatas(int setID) {
-        String sql = "select * from " + tableName2 + " where setID = " + setID
-                + ";";
-        Cursor results = db.rawQuery(sql, null);
- 
-        results.moveToFirst();
-        ArrayList<TestDataModel> testsets = new ArrayList<TestDataModel>();
- 
-        while (!results.isAfterLast()) {
-        	TestDataModel testset = new TestDataModel(results.getInt(0), results.getInt(1), results.getInt(4), results.getInt(2), results.getShort(3));
-        	testsets.add(testset);
-            results.moveToNext();
-        }
-        results.close();
-        return testsets;
-    }
-    /**
-     * 특정 세트의 결과 데이터 선택
-     * @param setID
-     * @param earSide
-     * @return
-     */
-    public ArrayList<TestDataModel> selectTestDatas(int setID, int earSide) {
-        String sql = "select * from " + tableName2 + " where setID = " + setID
-                + " and earSide = " + earSide + ";";
-        Cursor results = db.rawQuery(sql, null);
- 
-        results.moveToFirst();
-        ArrayList<TestDataModel> testsets = new ArrayList<TestDataModel>();
- 
-        while (!results.isAfterLast()) {
-        	TestDataModel testset = new TestDataModel(results.getInt(0), results.getInt(1), results.getInt(4), results.getInt(2), results.getShort(3));
-        	testsets.add(testset);
-            results.moveToNext();
-        }
-        results.close();
-        return testsets;
-    }
+    
     /**
      *  데이터세트 전체 검색
-     * @param userID
-     * @return User Set List
+     * 
+     * @return User List
      */
-    public ArrayList<ScreeningModel> selectSetAll() {
-        String sql = "select * from " + tableName + ";";
+    public ArrayList<UserInformationModel> selectUserData() {
+        String sql = "select * from " + tableName2 + ";";
         Cursor results = db.rawQuery(sql, null);
  
         results.moveToFirst();
-        ArrayList<ScreeningModel> testsets = new ArrayList<ScreeningModel>();
+        ArrayList<UserInformationModel> userSets = new ArrayList<UserInformationModel>();
  
         while (!results.isAfterLast()) {
-        	ScreeningModel testset = new ScreeningModel(results.getInt(0), results.getString(1), results.getString(2),
-                    results.getString(3), results.getString(4));
-        	testsets.add(testset);
+        	UserInformationModel info = new UserInformationModel(results.getInt(0), results.getString(1),
+        			results.getString(2),
+        			results.getString(3),
+        			results.getString(4),
+        			results.getString(5));
+        	userSets.add(info);
             results.moveToNext();
         }
         results.close();
-        return testsets;
+        return userSets;
     }
     /**
      *  사용자 데이터세트 검색
@@ -247,26 +199,7 @@ public class UserInformationDBManager {
         results.close();
         return testsets;
     }
-    /**
-     * 결과 데이터 전체 선택
-     * @return
-     */
-    public ArrayList<TestDataModel> selectDataAll() {
-        String sql = "select * from " + tableName + ";";
-        Cursor results = db.rawQuery(sql, null);
- 
-        results.moveToFirst();
-        ArrayList<TestDataModel> testsets = new ArrayList<TestDataModel>();
- 
-        while (!results.isAfterLast()) {
-        	TestDataModel testset = new TestDataModel(results.getInt(0), results.getInt(1), results.getInt(2), results.getInt(3),
-                    results.getShort(4));
-        	testsets.add(testset);
-            results.moveToNext();
-        }
-        results.close();
-        return testsets;
-    }
+
     /**
      * Save all set data into csv file
      * @param filePath File Path(in the External Storage)
@@ -274,80 +207,48 @@ public class UserInformationDBManager {
      * @return 'true' if succeed, 'false' if failed.
      */
     public boolean exportDataIntoCSV(String filePath, String fileName){
-	    ArrayList<ScreeningModel> scrUserSet = selectSetAll();
-	    return saveIntoCSV(scrUserSet, filePath, fileName);
-	}
-    /**
-     * Save the particular user's set data into csv file
-     * @param filePath File Path(in the External Storage)
-     * @param fileName File Name. should be '.csv'
-     * @param userID User ID
-     * @return 'true' if succeed, 'false' if failed.
-     */
-    public boolean exportDataIntoCSV(String filePath, String fileName, String userID){
-	    ArrayList<ScreeningModel> scrUserSet = selectSetUser(userID);
-	    return saveIntoCSV(scrUserSet, filePath, fileName);
+	    ArrayList<UserInformationModel> userSet = selectUserData();
+	    return saveIntoCSV(userSet, filePath, fileName);
 	}
     
     /**
      * Save the list into csv file. Should be used in private.
-     * @param scrUserSet User set List
+     * @param userSet User set List
      * @param filePath File Path(in the External Storage)
      * @param fileName File Name. should be '.csv'
      * @return 'true' if succeed, 'false' if failed.
      */
-    private boolean saveIntoCSV(ArrayList<ScreeningModel> scrUserSet, String filePath, String fileName){
+    private boolean saveIntoCSV(ArrayList<UserInformationModel> userSet, String filePath, String fileName){
     	File exportDir = new File(Environment.getExternalStorageDirectory(), filePath);
 	    exportDir.mkdirs();
 	    File file = new File(exportDir, fileName);
 		try {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
-			bw.write("\"ID\",\"First Name\",\"Last Name\",\"User ID\",\"Created On\",\"EarSide\",\"Frequency\",\"dB\"");
+			bw.write("\"ID\",\"First Name\",\"Last Name\",\"User ID\",\"Created On\"");
             bw.newLine();
-			for(ScreeningModel setModel : scrUserSet){
-				ArrayList<TestDataModel> scrTestSet = selectTestDatas(setModel.getID());
-				for(TestDataModel dataModel : scrTestSet){
-					StringBuffer oneLine = new StringBuffer();
-					oneLine.append("\"");
-					oneLine.append(Integer.toString(setModel.getID()));
-					oneLine.append("\"");
-					oneLine.append(",");
-					oneLine.append("\"");
-					oneLine.append(setModel.getFirstName());
-					oneLine.append("\"");
-					oneLine.append(",");
-					oneLine.append("\"");
-					oneLine.append(setModel.getLastName());
-					oneLine.append("\"");
-					oneLine.append(",");
-					oneLine.append("\"");
-					oneLine.append(setModel.getUserId());
-					oneLine.append("\"");
-					oneLine.append(",");
-					oneLine.append("\"");
-					oneLine.append(setModel.getCreatedOn());
-					oneLine.append("\"");
-					oneLine.append(",");
-					oneLine.append("\"");
-					switch(dataModel.getEarSide()){
-					case 0:
-						oneLine.append("Left");
-						break;
-					case 1:
-						oneLine.append("Right");
-					}
-					oneLine.append("\"");
-					oneLine.append(",");
-					oneLine.append("\"");
-					oneLine.append(Integer.toString(dataModel.getFrequency()));
-					oneLine.append("\"");
-					oneLine.append(",");
-					oneLine.append("\"");
-					oneLine.append(Integer.toString(dataModel.getDeciBel()));
-					oneLine.append("\"");
-					bw.write(oneLine.toString());
-	                bw.newLine();
-				}
+			for(UserInformationModel setModel : userSet){
+				StringBuffer oneLine = new StringBuffer();
+				oneLine.append("\"");
+				oneLine.append(Integer.toString(setModel.getID()));
+				oneLine.append("\"");
+				oneLine.append(",");
+				oneLine.append("\"");
+				oneLine.append(setModel.getFirstName());
+				oneLine.append("\"");
+				oneLine.append(",");
+				oneLine.append("\"");
+				oneLine.append(setModel.getLastName());
+				oneLine.append("\"");
+				oneLine.append(",");
+				oneLine.append("\"");
+				oneLine.append(setModel.getUserId());
+				oneLine.append("\"");
+				oneLine.append(",");
+				oneLine.append("\"");
+				oneLine.append(setModel.getCreatedOn());
+				oneLine.append("\"");
+				bw.write(oneLine.toString());
+                bw.newLine();
 			}
             bw.flush();
             bw.close();

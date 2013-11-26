@@ -8,69 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".SubjFirstActivity" >
 
-    <TextView
-        style="@style/SubjectFirstTextStyle"
-        android:id="@+id/textEmptyView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/txt_firstName" />
-
-    <EditText
-        android:id="@+id/editTextSubjName1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textEmptyView"
-        android:ems="10"
-        android:inputType="textPersonName" />
-
-    <TextView
-        style="@style/SubjectFirstTextStyle"
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editTextSubjName1"
-        android:layout_below="@+id/editTextSubjName1"
-        android:text="@string/txt_lastName" />
-
-    <EditText
-        android:id="@+id/editTextSubjName2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView2"
-        android:ems="10"
-        android:inputType="textPersonName" />
-
-    <TextView
-        style="@style/SubjectFirstTextStyle"
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editTextSubjName2"
-        android:text="@string/txt_userId" />
-
-    <EditText
-        android:id="@+id/editTextSubjId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView3"
-        android:ems="10"
-        android:inputType="text" />
-    
-    <Button
-        style="@style/SubjectFirstButtonStyle"
-        android:id="@+id/buttonSubjBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editTextSubjId"
-        android:text="@string/btn_Back" />
-
     <Button
         style="@style/SubjectFirstButtonStyle"
         android:id="@+id/buttonSubjNext1"
@@ -80,5 +17,34 @@
         android:layout_alignBottom="@+id/buttonSubjBack"
         android:layout_alignParentRight="true"
         android:text="@string/btn_Next" />
+
+    <Button
+        android:id="@+id/buttonSubjBack"
+        style="@style/SubjectFirstButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/btn_Back" />
+
+    <ListView
+        android:id="@+id/listViewUserInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonSubjBack"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" >
+
+    </ListView>
+
+    <TextView
+        android:id="@+id/textEmptyView"
+        style="@style/SubjectListTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/list_noresult" />
 
 </RelativeLayout>

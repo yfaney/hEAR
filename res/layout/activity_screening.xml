@@ -10,18 +10,8 @@
     tools:context=".ScreeningActivity" >
 
     <Button
-        style="@style/ScreeningButtonStyle"
-        android:id="@+id/buttonBeginScrng"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textViewScrngComplete"
-        android:text="@string/btn_beginScrning" />
-
-    <Button
-        style="@style/ScreeningButtonStyle"
         android:id="@+id/buttonExitToMain"
+        style="@style/ScreeningButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -30,12 +20,53 @@
         android:text="@string/btn_exitToMain" />
 
     <TextView
-        style="@style/ScreeningTextStyle"
         android:id="@+id/textViewScrngComplete"
+        style="@style/ScreeningTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/buttonBeginScrng"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:text="@string/txt_scrningStart" />
 
+	<TextView
+	    android:id="@+id/textInstrSub1"
+	    style="@style/TrialTextStyle"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentLeft="true"
+	    android:layout_alignParentRight="true"
+	    android:layout_below="@+id/textViewScrngComplete"
+	    android:text="@string/txt_instrSub1" />
+
+	<TextView
+	    android:id="@+id/textInstrSub2"
+	    style="@style/TrialTextStyle"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/textInstrSub1"
+	    android:layout_alignParentRight="true"
+	    android:layout_below="@+id/textInstrSub1"
+	    android:text="@string/txt_instrSub2" />
+	
+	<TextView
+	    android:id="@+id/textInstrSub3"
+	    style="@style/TrialTextStyle"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/textInstrSub2"
+	    android:layout_alignParentRight="true"
+	    android:layout_below="@+id/textInstrSub2"
+	    android:text="@string/txt_instrSub3" />
+	
+	<Button
+	    android:id="@+id/buttonBeginScrng"
+	    style="@style/ScreeningButtonStyle"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/textInstrSub3"
+	    android:layout_alignParentRight="true"
+	    android:layout_below="@+id/textInstrSub3"
+	    android:text="@string/btn_beginScrning" />
+    
 </RelativeLayout>

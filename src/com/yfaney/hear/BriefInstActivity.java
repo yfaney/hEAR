@@ -14,9 +14,11 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class BriefInstActivity extends Activity implements OnClickListener, DialogInterface.OnClickListener{
 
+	Intent intent = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,8 +49,8 @@ public class BriefInstActivity extends Activity implements OnClickListener, Dial
       		finish();
 	      } 
 	      break; 
-	    } 
-	  } 
+	    }
+	  }
 	}
 
 	@Override
@@ -59,6 +61,11 @@ public class BriefInstActivity extends Activity implements OnClickListener, Dial
 			// TODO Auto-generated method stub
 			break;
 		case DialogInterface.BUTTON_NEGATIVE:
+			Toast.makeText(this, getResources().getString(R.string.txt_warning_unplug), Toast.LENGTH_SHORT).show();
+			if(intent != null){
+	    		startActivityForResult(intent, MainActivity.SUBJECTACTION);
+			}
+    		break;
 		}
 	}
 
@@ -67,19 +74,19 @@ public class BriefInstActivity extends Activity implements OnClickListener, Dial
 		// TODO Auto-generated method stub
 		switch(v.getId()){
 		case R.id.buttonBeginTrial:
+    		intent = new Intent(BriefInstActivity.this, TrialRunActivity.class); // 평범한 Intent 생성
             if(ifEarphoneConnectedOrAlert()){
-        		Intent intent = new Intent(BriefInstActivity.this, TrialRunActivity.class); // 평범한 Intent 생성
         		//startActivity(intent);                                    // Activity 실행
-        		startActivityForResult(intent, MainActivity.SUBJECTACTION);
     			//mToneThread = new ToneThread(sampleRate, ToneThread.LEFT_EAR, frequency, (short)50);
     			//tonePlayer.playSound();
+        		startActivityForResult(intent, MainActivity.SUBJECTACTION);
             }
             else{
             }
 	        break;
 		case R.id.buttonSkipTrial:
+    		intent = new Intent(BriefInstActivity.this, ScreeningActivity.class); // 평범한 Intent 생성
             if(ifEarphoneConnectedOrAlert()){
-        		Intent intent = new Intent(BriefInstActivity.this, ScreeningActivity.class); // 평범한 Intent 생성
         		//startActivity(intent);                                    // Activity 실행
         		startActivityForResult(intent, MainActivity.SUBJECTACTION);
             }

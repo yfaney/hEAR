@@ -11,7 +11,6 @@ import com.jjoe64.graphview.GraphViewSeries.GraphViewSeriesStyle;
 import com.jjoe64.graphview.GraphViewStyle;
 import com.jjoe64.graphview.LineGraphView;
 import com.yfaney.hear.R;
-import com.yfaney.hear.ScreeningActivity.ToneThread;
 
 import android.os.Build;
 import android.os.Bundle;

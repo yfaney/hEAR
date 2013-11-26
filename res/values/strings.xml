@@ -37,12 +37,14 @@
     <!-- Dialog Text -->
     <string name="txt_delete_confirm">All data will be deleted. It cannot be covered. Would you continue?</string>
     <string name="txt_unplug_confirm">You are not plugging an earphone or headphone. Please use your earphone for an accurate test.</string>
+    <string name="txt_warning_unplug">We strongly recommend to use a headphone or earphone for an accurate test.</string>
     
 	<!-- Button Text -->
     <string name="btn_subject">Subject</string>
     <string name="btn_screener">Screener</string>
     <string name="btn_Next">Next</string>
     <string name="btn_Back">Back</string>
+    <string name="btn_Edit">Edit</string>
     <string name="btn_Delete">Delete</string>
     <string name="btn_Cancel">Cancel</string>
     <string name="btn_Submit">Submit</string>

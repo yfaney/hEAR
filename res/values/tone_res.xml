@@ -14,9 +14,9 @@
         <item>40</item>
         <item>40</item>
         <item>50</item>
+        <item>50</item>
         <item>65</item>
-        <item>80</item>
-        <item>85</item>
+        <item>65</item>
     </integer-array>
 	<string-array name="decibel_amplitute">
 		<item>3</item>

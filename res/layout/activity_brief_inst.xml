@@ -17,35 +17,33 @@
         android:layout_alignParentTop="true"
         android:text="@string/txt_instruction1" />
 
-    <TextView
-        style="@style/BriefInstructionTextStyle"
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textViewTrialComplete"
-        android:layout_below="@+id/textViewTrialComplete"
-        android:layout_marginTop="33dp"
-        android:text="@string/txt_instruction2" />
-
-    <Button
-        style="@style/BriefInstructionButtonStyle"
-        android:id="@+id/buttonBeginTrial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="32dp"
-        android:text="@string/btn_beginTrial" />
+	<TextView
+	    android:id="@+id/textView2"
+	    style="@style/BriefInstructionTextStyle"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/textViewTrialComplete"
+	    android:layout_below="@+id/textViewTrialComplete"
+	    android:text="@string/txt_instruction2" />
 
 	<Button
-	    style="@style/BriefInstructionButtonStyle_LongTxt"
 	    android:id="@+id/buttonSkipTrial"
+	    style="@style/BriefInstructionButtonStyle_LongTxt"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_alignLeft="@+id/buttonBeginTrial"
+	    android:layout_alignParentRight="true"
 	    android:layout_below="@+id/buttonBeginTrial"
-	    android:layout_marginTop="10dp"
 	    android:text="@string/btn_skiptoScrning" />
+
+	<Button
+	    android:id="@+id/buttonBeginTrial"
+	    style="@style/BriefInstructionButtonStyle"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/textView2"
+	    android:layout_alignParentRight="true"
+	    android:layout_below="@+id/textView2"
+	    android:text="@string/btn_beginTrial" />
 
 </RelativeLayout>

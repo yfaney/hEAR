@@ -27,7 +27,7 @@ public class ScreenerActivity extends Activity {
 		buttonManageScrnr.setOnClickListener( new Button.OnClickListener(){
         	@Override
 			public void onClick(View v) {
-        		Intent intent = new Intent(ScreenerActivity.this, NewScreenerActivity.class); // 평범한 Intent 생성
+        		Intent intent = new Intent(ScreenerActivity.this, ScreenerMgtActivity.class); // 평범한 Intent 생성
         		//startActivity(intent);                                    // Activity 실행
         		startActivityForResult(intent, ADDNEWSCREENER);
         	}

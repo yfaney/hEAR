@@ -9,7 +9,7 @@
     tools:context=".ScreenerMgtActivity" >
 
     <ListView
-        android:id="@+id/listView1"
+        android:id="@+id/listViewUserInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/buttonNewScreener"
@@ -22,7 +22,7 @@
         android:id="@+id/buttonNewScreener"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/listView1"
+        android:layout_alignLeft="@+id/listViewUserInfo"
         android:layout_alignParentBottom="true"
         android:text="@string/btn_newScreener" />
 
@@ -30,8 +30,8 @@
         android:id="@+id/buttonImportUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/listView1"
-        android:layout_below="@+id/listView1"
+        android:layout_alignRight="@+id/listViewUserInfo"
+        android:layout_below="@+id/listViewUserInfo"
         android:text="@string/btn_import_csv" />
 
     <TextView
