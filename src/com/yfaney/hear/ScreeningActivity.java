@@ -21,7 +21,6 @@ import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ScreeningActivity extends Activity implements OnClickListener, OnTouchListener{
 	private final static int SEND_THREAD_STOP_MESSAGE = 0;

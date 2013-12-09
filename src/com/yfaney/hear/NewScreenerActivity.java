@@ -23,6 +23,7 @@ public class NewScreenerActivity extends Activity implements OnClickListener {
 		intent = getIntent();
         Button buttonNewUserReg = (Button)findViewById(R.id.buttonNewUserReg);
 		if(intent.getStringExtra("ActionType").equals("Edit")){
+			setTitle(getResources().getString(R.string.title_activity_new_screener2));
 			UserInformationDBManager dbManager = new UserInformationDBManager(this);
 			dbId = intent.getIntExtra("selectedItem", -1);
 			UserInformationModel info = dbManager.selectUserData(dbId);
@@ -75,5 +76,4 @@ public class NewScreenerActivity extends Activity implements OnClickListener {
 	        break;
 		}
 	}
-
 }

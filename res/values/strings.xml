@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">hEAR v0.82</string>
+    <string name="app_name">hEAR v0.83</string>
     <string name="hello_world">Hello world!</string>
     
     <!-- Activity Title -->
@@ -15,6 +15,7 @@
     <string name="title_activity_subj_list">Subject List</string>
     <string name="title_activity_subj_graph">Graph</string>
     <string name="title_activity_new_screener">Add New Screener</string>
+    <string name="title_activity_new_screener2">Edit Screener</string>
     
     <!-- Form TextView -->
     <string name="txt_organization">Organization</string>

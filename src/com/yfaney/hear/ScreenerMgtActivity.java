@@ -38,7 +38,7 @@ public class ScreenerMgtActivity extends Activity implements OnClickListener, On
 		UserInformationDBManager dbManager = new UserInformationDBManager(this);
 	    ArrayList<UserInformationModel> userData = dbManager.selectUserData();
 	    for(int i=0 ; i < userData.size() ; i++){
-	    	list.add(new TableItem(userData.get(i).getCreatedOn(), userData.get(i).getFirstName() + " " + userData.get(i).getLastName(), userData.get(i).getID(), null));
+	    	list.add(new TableItem(userData.get(i).getUserId(), userData.get(i).getFirstName() + " " + userData.get(i).getLastName(), userData.get(i).getID(), null));
 	    }
 	    if(list.isEmpty()){
 			txtEmpty.setVisibility(TextView.VISIBLE);	    	
@@ -167,7 +167,7 @@ public class ScreenerMgtActivity extends Activity implements OnClickListener, On
 	    ArrayList<UserInformationModel> userData = dbManager.selectUserData();
 	    list.clear();
 	    for(int i=0 ; i < userData.size() ; i++){
-	    	list.add(new TableItem(userData.get(i).getCreatedOn(), userData.get(i).getFirstName() + " " + userData.get(i).getLastName(), userData.get(i).getID(), null));
+	    	list.add(new TableItem(userData.get(i).getUserId(), userData.get(i).getFirstName() + " " + userData.get(i).getLastName(), userData.get(i).getID(), null));
 	    }
 		adapter = new TableAdapter(this, R.layout.row, list);
 		userList.setAdapter(adapter);

@@ -35,7 +35,7 @@ public class SubjFirstActivity extends Activity implements OnClickListener, OnIt
 		UserInformationDBManager dbManager = new UserInformationDBManager(this);
 	    ArrayList<UserInformationModel> userData = dbManager.selectUserData();
 	    for(int i=0 ; i < userData.size() ; i++){
-	    	list.add(new TableItem(userData.get(i).getCreatedOn(), userData.get(i).getFirstName() + " " + userData.get(i).getLastName(), userData.get(i).getID(), null));
+	    	list.add(new TableItem(userData.get(i).getUserId(), userData.get(i).getFirstName() + " " + userData.get(i).getLastName(), userData.get(i).getID(), null));
 	    }
 	    if(list.isEmpty()){
 			txtEmpty.setVisibility(TextView.VISIBLE);	    	

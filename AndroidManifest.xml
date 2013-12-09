@@ -3,7 +3,7 @@
     package="com.yfaney.hear"
     android:installLocation="auto"
     android:versionCode="4"
-    android:versionName="0.83" >
+    android:versionName="0.84" >
 
     <uses-sdk
         android:minSdkVersion="8"

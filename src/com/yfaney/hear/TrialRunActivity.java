@@ -2,9 +2,7 @@ package com.yfaney.hear;
 
 import com.yfaney.hear.R;
 
-import android.media.AudioFormat;
 import android.media.AudioManager;
-import android.media.AudioTrack;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,7 +18,6 @@ import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class TrialRunActivity extends Activity implements OnClickListener, OnTouchListener{
 	private final static int SEND_THREAD_STOP_MESSAGE = 0;
