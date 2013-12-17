@@ -153,6 +153,33 @@ public class UserInformationDBManager {
         result.close();
         return null;
     }
+
+    // 단일 데이터 검색
+    public UserAdminInfoModel selectAdminData() {
+        String sql = "select * from " + tableName + ";";
+        Cursor result = db.rawQuery(sql, null);
+ 
+        // result(Cursor 객체)가 비어 있으면 false 리턴
+        if (result.moveToFirst()) {
+        	UserAdminInfoModel info = new UserAdminInfoModel(result.getInt(0) , result.getString(1),
+        			result.getString(2),
+        			result.getString(3),
+        			result.getString(4),
+        			result.getString(5),
+        			result.getString(6),
+        			result.getString(7));
+            result.close();
+            return info;
+        }
+        result.close();
+        return null;
+    }
+    
+    public int isAdminDBIn(){
+    	String sql = "select * from " + tableName + ";";
+    	Cursor result = db.rawQuery(sql, null);
+    	return result.getCount();
+    }
     
     /**
      *  데이터세트 전체 검색

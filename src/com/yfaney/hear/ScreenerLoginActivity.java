@@ -7,6 +7,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -43,7 +44,7 @@ public class ScreenerLoginActivity extends Activity {
 	// Values for email and password at the time of the login attempt.
 	private String mEmail;
 	private String mPassword;
-
+	private UserAdminInfoModel adminModel;
 	// UI references.
 	private EditText mEmailView;
 	private EditText mPasswordView;
@@ -54,6 +55,8 @@ public class ScreenerLoginActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		UserInformationDBManager dbManager = new UserInformationDBManager(this);
+		adminModel = dbManager.selectAdminData();
 
 		setContentView(R.layout.activity_screener_login);
 		// Set up the login form.
@@ -115,7 +118,6 @@ public class ScreenerLoginActivity extends Activity {
 
 		boolean cancel = false;
 		View focusView = null;
-		/*
 		// Check for a valid password.
 		if (TextUtils.isEmpty(mPassword)) {
 			mPasswordView.setError(getString(R.string.error_field_required));
@@ -132,7 +134,7 @@ public class ScreenerLoginActivity extends Activity {
 			mEmailView.setError(getString(R.string.error_field_required));
 			focusView = mEmailView;
 			cancel = true;
-		} else if (!mEmail.contains("@")) {
+		}/* else if (!mEmail.contains("@")) {
 			mEmailView.setError(getString(R.string.error_invalid_email));
 			focusView = mEmailView;
 			cancel = true;
@@ -218,9 +220,13 @@ public class ScreenerLoginActivity extends Activity {
 			}
 			*/
 			/* Real Authentication Start */
+			if(mEmail.equals(adminModel.getUserId())){
+				return mPassword.equals(adminModel.getPassWord());
+			}
+			else{
+				return false;
+			}
 			/* Real Authentication End */
-			// TODO: register the new account here.
-			return true;
 		}
 
 		@Override
@@ -229,12 +235,15 @@ public class ScreenerLoginActivity extends Activity {
 			showProgress(false);
 
 			if (success) {
-        		Intent intent = new Intent(ScreenerLoginActivity.this, SubjListActivity.class); // 평범한 Intent 생성
-        		intent.putExtra("UserID", mEmail);
-        		//startActivity(intent);                                    // Activity 실행
-        		startActivityForResult(intent, MainActivity.SCREENERACTION);
-
-				finish();
+	    		SharedPreferences prefs = getSharedPreferences("UserInformation", Activity.MODE_PRIVATE);
+	    		SharedPreferences.Editor editor = prefs.edit();
+	    		editor.putString("UserFirstName", adminModel.getFirstName());
+	    		editor.putString("UserLastName", adminModel.getLastName());
+	    		editor.putString("UserID", adminModel.getUserId());
+	    		editor.commit();
+	    		Intent resultIntent = new Intent();
+	    		setResult(Activity.RESULT_OK, resultIntent);
+	    		finish();
 			} else {
 				mPasswordView
 						.setError(getString(R.string.error_incorrect_password));

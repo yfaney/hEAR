@@ -10,14 +10,14 @@
 
     <Button
         style="@style/ScreenerMainButtonStyle"
-        android:id="@+id/buttonScrLogIn"
+        android:id="@+id/buttonSubjList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="52dp"
-        android:text="@string/btn_login" />
+        android:text="@string/btn_subjList" />
 
     <Button
         style="@style/ScreenerMainButtonStyle"
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/buttonScrLogIn"
+        android:layout_below="@+id/buttonSubjList"
         android:layout_marginTop="69dp"
         android:text="@string/btn_manageScreener" />
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import com.jjoe64.graphview.CustomLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphView.GraphViewData;
 import com.jjoe64.graphview.GraphViewSeries;
@@ -41,10 +42,10 @@ public class SubjGraphActivity extends Activity {
 	    GraphViewData[] graphLeftData = new GraphViewData[scrTestLeftData.size()];
 	    GraphViewData[] graphRightData = new GraphViewData[scrTestRightData.size()];
 		for (int i=0; i<scrTestLeftData.size(); i++) {
-			graphLeftData[i] = new GraphViewData(scrTestLeftData.get(i).getFrequency(), scrTestLeftData.get(i).getDeciBel());
+			graphLeftData[i] = new GraphViewData(scrTestLeftData.get(i).getFrequency(), (short)100-scrTestLeftData.get(i).getDeciBel());
 		}
 		for (int i=0; i<scrTestRightData.size(); i++) {
-			graphRightData[i] = new GraphViewData(scrTestRightData.get(i).getFrequency(), scrTestRightData.get(i).getDeciBel());
+			graphRightData[i] = new GraphViewData(scrTestRightData.get(i).getFrequency(), (short)100-scrTestRightData.get(i).getDeciBel());
 		}
 	    GraphViewSeriesStyle leftStyle = new GraphViewSeriesStyle(0xFFFF1121,2);
 	    GraphViewSeriesStyle rightStyle = new GraphViewSeriesStyle(0xFF00FF21,2);
@@ -54,7 +55,54 @@ public class SubjGraphActivity extends Activity {
 	    GraphView graphView = new LineGraphView(  
 	          this // context  
 	          , "Data" // heading  
-	    );  
+	    );
+	    graphView.setCustomLabelFormatter(new CustomLabelFormatter() {
+	    	   @Override
+	    	   public String formatLabel(double value, boolean isValueX) {
+	    	      if (isValueX) {
+	    	         if (value <= 0) {
+	    	            return "0Hz";
+	    	         } else if (value <= 125) {
+	    	            return "125Hz";
+	    	         } else if (value <= 250) {
+	    	            return "250Hz";
+	    	         } else if (value <= 500) {
+	    	            return "500Hz";
+	    	         } else if (value <= 1000) {
+	    	            return "1000Hz";
+	    	         } else if (value <= 2000) {
+	    	            return "2000Hz";
+	    	         } else if (value <= 4000) {
+	    	            return "4000Hz";
+	    	         } else {
+	    	            return "8000Hz";
+	    	         }
+	    	      }
+	    	      else{
+	    	         if (value <= 20) {
+	    	            return "poor";
+	    	         } else if (value <= 30) {
+	    	            return "70dB";
+	    	         } else if (value <= 40) {
+	    	            return "60dB";
+	    	         } else if (value <= 50) {
+	    	            return "50dB";
+	    	         } else if (value <= 60) {
+	    	            return "40dB";
+	    	         } else if (value <= 70) {
+	    	            return "30dB";
+	    	         } else if (value <= 80) {
+	    	            return "20dB";
+	    	         } else if (value <= 90) {
+	    	            return "10dB";
+	    	         } else if (value <= 100) {
+	    	            return "0dB";
+	    	         } else {
+	    	            return "excellent";
+	    	         }
+	    	      }
+	    	   }
+	    	});
 	    graphView.setGraphViewStyle(new GraphViewStyle(0xFF000055,0xFF000055,0xFF000000));
 	    //graphView.setManualYAxisBounds(90.0, -10.0);
 	    int dimension[] = getWidthHeight();
@@ -98,9 +146,48 @@ public class SubjGraphActivity extends Activity {
 	}
 	public int getHeight(){
 		return 0;
-		
 	}
 	
+	public void getMinMax(ArrayList<TestDataModel> modelSet, int[] graphMinMax){
+		if((modelSet == null)||(modelSet.size() == 0)){
+		}
+		else{
+			if(modelSet.size() == 1){
+				graphMinMax[0] = graphMinMax[1] = modelSet.get(0).getDeciBel();
+			}
+			else if(modelSet.size() == 2){
+				if(modelSet.get(0).getDeciBel() < modelSet.get(1).getDeciBel()){
+					graphMinMax[0] = modelSet.get(0).getDeciBel();
+					graphMinMax[1] = modelSet.get(1).getDeciBel();
+				}
+				else{
+					graphMinMax[0] = modelSet.get(1).getDeciBel();
+					graphMinMax[1] = modelSet.get(0).getDeciBel();
+				}
+			}
+			else{
+				int mid = modelSet.size()/2;
+				int[] lMinMax1 = new int[2]; 
+				int[] lMinMax2 = new int[2]; 
+				getMinMax((ArrayList<TestDataModel>) modelSet.subList(0, mid), lMinMax1);
+				getMinMax((ArrayList<TestDataModel>) modelSet.subList(0, mid), lMinMax2);
+				if (lMinMax1[0]<lMinMax2[0]){
+					graphMinMax[0] = lMinMax1[0];
+				}
+				else{
+					graphMinMax[0] = lMinMax2[0];
+				}
+				if (lMinMax1[1]>lMinMax2[1]){
+					graphMinMax[1] = lMinMax1[1];
+				}
+				else{
+					graphMinMax[1] = lMinMax2[1];
+				}
+			}
+		}
+	}
+	
+
 	public class CustomComparator implements Comparator<TestDataModel> {
 	    @Override
 	    public int compare(TestDataModel o1, TestDataModel o2) {
