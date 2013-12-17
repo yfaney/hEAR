@@ -57,10 +57,10 @@ public class UserInformationDBManager {
                     + "id integer primary key autoincrement, "
             		+ "FirstName text, "
                     + "LastName text, "
-                    + "Organization text, "
-                    + "EmailAddress text, "
                     + "UserID text, "
                     + "Password text, "
+                    + "Organization text, "
+                    + "EmailAddress text, "
                     + "CreatedOn text)";
             arg0.execSQL(createSql);
             createSql = "create table " + tableName2 + " ("
@@ -93,10 +93,10 @@ public class UserInformationDBManager {
     	ContentValues newValues = new ContentValues();
     	newValues.put("FirstName", model.getFirstName());
     	newValues.put("LastName", model.getLastName());
+    	newValues.put("UserID", model.getUserId());
+    	newValues.put("Password", model.getPassWord());
     	newValues.put("Organization", model.getOrganization());
     	newValues.put("EmailAddress", model.getEmailAddress());
-    	newValues.put("UserID", model.getUserId());
-    	newValues.put("Password", model.getUserId());
     	newValues.put("CreatedOn", model.getCreatedOn());
     	return db.insert(tableName, null, newValues);
     }

@@ -80,23 +80,23 @@ public class AdminActivity extends Activity implements OnClickListener{
 				cancel = true;
 			}
 			if(TextUtils.isEmpty(mLastName)){
-				editTextAdmName1.setError(getString(R.string.error_field_required));
-				focusView = editTextAdmName1;
+				editTextAdmName2.setError(getString(R.string.error_field_required));
+				focusView = editTextAdmName2;
 				cancel = true;
 			}
 			if(TextUtils.isEmpty(mUserId)){
-				editTextAdmName1.setError(getString(R.string.error_field_required));
-				focusView = editTextAdmName1;
+				editTextAdmUserId.setError(getString(R.string.error_field_required));
+				focusView = editTextAdmUserId;
 				cancel = true;
 			}
 			if(TextUtils.isEmpty(mPassWd)){
-				editTextAdmName1.setError(getString(R.string.error_field_required));
-				focusView = editTextAdmName1;
+				editTextAdmPasswd.setError(getString(R.string.error_field_required));
+				focusView = editTextAdmPasswd;
 				cancel = true;
 			}
 			if(TextUtils.isEmpty(mOrgan)){
-				editTextAdmName1.setError(getString(R.string.error_field_required));
-				focusView = editTextAdmName1;
+				editTextAdmOrg.setError(getString(R.string.error_field_required));
+				focusView = editTextAdmOrg;
 				cancel = true;
 			}
 			if (TextUtils.isEmpty(mEmail)) {

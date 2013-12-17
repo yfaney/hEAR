@@ -13,6 +13,8 @@ import android.widget.Button;
 public class ScreenerActivity extends Activity {
 	public static final int ADDNEWSCREENER = 3;
 	public static final int ADMINLOGIN = 4;
+
+	Bundle loginStatus;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,13 +36,9 @@ public class ScreenerActivity extends Activity {
         		startActivityForResult(intent, ADDNEWSCREENER);
         	}
         });
-		SharedPreferences prefs = getSharedPreferences("UserInformation", Activity.MODE_PRIVATE);
-		String firstName = prefs.getString("UserFirstName", "ERROR:NOTLOGIN");
-		if(firstName.equals("ERROR:NOTLOGIN")){
-    		Intent intent = new Intent(ScreenerActivity.this, ScreenerLoginActivity.class); // 평범한 Intent 생성
-    		//startActivity(intent);                                    // Activity 실행
-    		startActivityForResult(intent, ADMINLOGIN);
-		}
+		Intent intent = new Intent(ScreenerActivity.this, ScreenerLoginActivity.class); // 평범한 Intent 생성
+		//startActivity(intent);                                    // Activity 실행
+		startActivityForResult(intent, ADMINLOGIN);
 	}
 
 	@Override
@@ -77,6 +75,7 @@ public class ScreenerActivity extends Activity {
 		}
 		case (ADMINLOGIN) : {
 			if (resultCode == Activity.RESULT_OK) { 
+				
 			}
 			else{
 				finish();

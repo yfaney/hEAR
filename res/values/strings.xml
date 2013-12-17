@@ -6,7 +6,7 @@
     
     <!-- Activity Title -->
     <string name="title_activity_admin">Administrator Setup</string>
-    <string name="title_activity_screener_login">Screener Login</string>
+    <string name="title_activity_screener_login">Administrator Login</string>
     <string name="title_activity_subj_first">Subject Main</string>
     <string name="title_activity_brief_inst">Brief Instruction</string>
     <string name="title_activity_trial_run">Trial Running</string>

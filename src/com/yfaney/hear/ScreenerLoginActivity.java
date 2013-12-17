@@ -235,12 +235,13 @@ public class ScreenerLoginActivity extends Activity {
 			showProgress(false);
 
 			if (success) {
+				/*
 	    		SharedPreferences prefs = getSharedPreferences("UserInformation", Activity.MODE_PRIVATE);
 	    		SharedPreferences.Editor editor = prefs.edit();
 	    		editor.putString("UserFirstName", adminModel.getFirstName());
 	    		editor.putString("UserLastName", adminModel.getLastName());
 	    		editor.putString("UserID", adminModel.getUserId());
-	    		editor.commit();
+	    		editor.commit();*/
 	    		Intent resultIntent = new Intent();
 	    		setResult(Activity.RESULT_OK, resultIntent);
 	    		finish();
