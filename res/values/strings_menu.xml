@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="action_export_csv">Export all to CSV File</string>
+	<string name="action_import_csv">Import from CSV File</string>
 	<string name="action_mailto_adm">Send to Administrator</string>
 	<string name="action_clear_all">Clear All</string>
-    <string name="menu_action">Select Action</string>
+	<string name="action_edit_admininfo">Edit Admin Information</string>
+	<string name="menu_action">Select Action</string>
     <string name="menu_edit">Edit</string>
 	<string name="menu_delete">Delete</string>
 </resources>

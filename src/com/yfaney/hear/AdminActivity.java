@@ -36,13 +36,15 @@ public class AdminActivity extends Activity implements OnClickListener{
 		editTextAdmPasswd = (EditText) findViewById(R.id.editTextAdmPasswd);
 		buttonSubjNext1 = (Button) findViewById(R.id.buttonSubjNext1);
 		buttonSubjNext1.setOnClickListener(this);
-	}
-	
-	@Override
-	protected void onDestroy(){
-		Intent resultIntent = new Intent();
-		setResult(Activity.RESULT_CANCELED, resultIntent);
-		finish();
+		UserInformationDBManager dbManager = new UserInformationDBManager(this);
+		if(dbManager.isAdminDBIn() == 0){
+			UserAdminInfoModel model = dbManager.selectAdminData();
+			editTextAdmName1.setText(model.getFirstName());
+			editTextAdmName2.setText(model.getLastName());
+			editTextAdmOrg.setText(model.getOrganization());
+			editTextAdmEmail.setText(model.getEmailAddress());
+			editTextAdmUserId.setText(model.getUserId());
+		}
 	}
 	
 	@Override

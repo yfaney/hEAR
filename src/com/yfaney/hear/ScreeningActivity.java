@@ -155,7 +155,7 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 			}
 			else if(event.getAction() == MotionEvent.ACTION_UP){
 				// TODO Releasing Screening - Tone Stop!
-				if (testSetIdx < scrSet.size()){
+				if (testSetIdx+1 < scrSet.size()){
 					if(scrSet.get(testSetIdx).getDeciBel() == mToneThread.getdB()){
 						scrSet.add(new ScreeningTestSet(scrSet.get(testSetIdx).getFrequency(), (short) (scrSet.get(testSetIdx).getDeciBel() + 5), scrSet.get(testSetIdx).getEarSide()));
 			            //Toast.makeText(this, "index increased= "+scrSet.size(), Toast.LENGTH_SHORT).show();
@@ -166,6 +166,8 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 					}
 					mMainHandler.sendEmptyMessage(SEND_THREAD_STOP_MESSAGE);
 					layout.setBackgroundResource(R.color.red);
+					TextView textInstrSub3 =(TextView)findViewById(R.id.textInstrSub3);
+					textInstrSub3.setText("<Progress : " + Integer.toString(testSetIdx+1) + " of " + Integer.toString(scrSet.size()) + " sets>");
 				}
 				else{
 					/* End Screening */

@@ -67,7 +67,7 @@ public class ScreeningSetDBManager {
                     + "deciBel integer, "
                     + "earSide integer)";
             arg0.execSQL(createSql);
-            Toast.makeText(context, "DB is opened", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "DB is opened", Toast.LENGTH_SHORT).show();
         }
  
         @Override

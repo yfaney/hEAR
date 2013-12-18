@@ -71,7 +71,7 @@ public class UserInformationDBManager {
                     + "Password text, "
                     + "CreatedOn text)";
             arg0.execSQL(createSql);
-            Toast.makeText(context, "DB is opened", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "DB is opened", Toast.LENGTH_SHORT).show();
         }
  
         @Override
@@ -88,6 +88,24 @@ public class UserInformationDBManager {
     	newValues.put("Password", model.getPassWord());
     	newValues.put("CreatedOn", model.getCreatedOn());
     	return db.insert(tableName2, null, newValues);
+    }
+    public int insertUserData(ArrayList<UserInformationModel> modelList) {
+    	int count = 0;
+    	for(UserInformationModel model : modelList){
+        	ContentValues newValues = new ContentValues();
+        	newValues.put("FirstName", model.getFirstName());
+        	newValues.put("LastName", model.getLastName());
+        	newValues.put("UserID", model.getUserId());
+        	newValues.put("Password", model.getPassWord());
+        	newValues.put("CreatedOn", model.getCreatedOn());
+        	long rowId = db.insert(tableName2, null, newValues); 
+        	if(rowId > 0){
+            	count++;
+        	}else if(rowId == -1){
+        		return -1;
+        	}
+    	}
+    	return count;
     }
     public long insertAdminData(UserAdminInfoModel model) {
     	ContentValues newValues = new ContentValues();

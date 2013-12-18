@@ -11,8 +11,10 @@
     <string name="action_forgot_password">Recover lost password</string>
     <string name="login_progress_signing_in">Signing in&#8230;</string>
     <string name="error_invalid_email">This email address is invalid</string>
+	<string name="error_invalid_userId">This ID is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_invalid_userId_or_pw">Incorrect User ID or Password</string>
     <string name="error_field_required">This field is required</string>
 
 </resources>

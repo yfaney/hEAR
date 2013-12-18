@@ -246,9 +246,9 @@ public class ScreenerLoginActivity extends Activity {
 	    		setResult(Activity.RESULT_OK, resultIntent);
 	    		finish();
 			} else {
-				mPasswordView
-						.setError(getString(R.string.error_incorrect_password));
-				mPasswordView.requestFocus();
+					mEmailView
+					.setError(getString(R.string.error_invalid_userId_or_pw));
+				mEmailView.requestFocus();
 			}
 		}
 
