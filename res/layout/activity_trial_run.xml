@@ -16,17 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/buttonBeginTrial"
         android:layout_alignParentTop="true"
-        android:text="@string/txt_instruction1" />
-
-    <Button
-        android:id="@+id/buttonBeginScrning"
-        style="@style/TrialButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/buttonBeginTrial"
-        android:text="@string/btn_beginScrning" />
+        android:text="@string/txt_instrSub1" />
 
     <TextView
         android:id="@+id/textInstrSub1"
@@ -36,7 +26,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textViewTrialComplete"
-        android:text="@string/txt_instrSub1" />
+        android:text="@string/txt_instrSub2" />
 
     <TextView
         android:id="@+id/textInstrSub2"
@@ -46,26 +36,27 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textInstrSub1"
-        android:text="@string/txt_instrSub2" />
-
-    <TextView
-        android:id="@+id/textInstrSub3"
-        style="@style/TrialTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textInstrSub1"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textInstrSub2"
         android:text="@string/txt_instrSub3" />
 
     <Button
         android:id="@+id/buttonBeginTrial"
+        style="@style/TonePlayButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonBeginScrning"
+        android:layout_alignLeft="@+id/buttonBeginScrning"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textInstrSub2"
+        android:text="@string/btn_playTone" />
+
+    <Button
+        android:id="@+id/buttonBeginScrning"
         style="@style/TrialButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textInstrSub3"
-        android:text="@string/btn_beginTrial" />
+        android:layout_alignLeft="@+id/textInstrSub2"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="24dp"
+        android:text="@string/btn_beginScrning" />
 
 </RelativeLayout>

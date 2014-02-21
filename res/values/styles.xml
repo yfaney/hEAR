@@ -98,5 +98,10 @@
     <style name="SubjectGraphTextStyle">
 	    <item name="android:textSize">0.15in</item>
 	</style>
+	
+	<!-- Tone Play Button Style -->
+    <style name="TonePlayButtonStyle">
+	    <item name="android:textSize">0.5in</item>
+	</style>
     	
 </resources>

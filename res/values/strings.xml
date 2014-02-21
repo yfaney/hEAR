@@ -29,11 +29,11 @@
 
     <!-- Instruction Text -->
     <string name="txt_instruction1">* Please note that the volume will be adjusted to max automatically.</string>
-    <string name="txt_instrSub1">* Press and hold screen to begin test.</string>
-	<string name="txt_instrSub2">* Playing tone will start, keep pressing screen until you cannot hearing tone.</string>
+    <string name="txt_instrSub1">* Playing tone will start with pressing &#9836; button, and keep pressing until you cannot hear the tone.</string>
+	<string name="txt_instrSub2">* The tone changes several time while testing.</string>
 	<string name="txt_instrSub3">* Repeat until test is completed</string>
 	<string name="txt_instruction2">You will have a brief trial to get you used to the procedure.</string>
-    <string name="txt_scrningStart">Now you can hear several tone sounds with pressing the screen. Please follow the instructions below.</string>
+    <string name="txt_scrningStart">Now you can hear several tone sounds. Please follow the instructions below.</string>
 
     <!-- Dialog Text -->
     <string name="txt_delete_confirm">All data will be deleted. It cannot be covered. Would you continue?</string>
@@ -53,8 +53,8 @@
     <string name="btn_beginTrial">Touch to begin Trial</string>
     <string name="btn_beginScrning">Touch to begin Screening</string>
     <string name="btn_skiptoScrning">I do not need trial. Let me go to screening.</string>
+    <string name="btn_playTone">&#9836;</string>
     <string name="btn_trialStart">Touch and keep touching the screen anywhere to hear the tone sounds. You can go back with press back button on your phone.</string>
-    <string name="btn_trialTesting">The tone changes with clicking background</string>
     <string name="btn_trialComplete">Trial Complete</string>
     <string name="btn_scrningTesting">Please release your finger if you cannot hear the tone sound.</string>
     <string name="btn_scrningComplete">Screening Complete</string>

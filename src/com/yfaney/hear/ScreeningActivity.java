@@ -77,8 +77,8 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 		userID = prefs.getString("UserID", "DefaultID");
 
 		// Moved from R.id.buttonBeginScrng at onClick Start
-		RelativeLayout layout = (RelativeLayout)findViewById(R.id.layout_screening);
-		buttonBeginScrng.setVisibility(View.INVISIBLE);
+		//RelativeLayout layout = (RelativeLayout)findViewById(R.id.layout_screening);
+		//buttonBeginScrng.setVisibility(View.INVISIBLE);
 		for(int j=0; j<2;j++){
 			for(int i=0;i < freq.length; i++){
 				scrSet.add(new ScreeningTestSet(freq[i], (short)freq2deciBel[i], ToneThread.LEFT_EAR));
@@ -86,8 +86,8 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 			}
 		}
 		Collections.shuffle(scrSet);
-		layout.setBackgroundResource(R.color.red);
-		layout.setOnTouchListener(this);
+		buttonBeginScrng.setBackgroundResource(R.color.red);
+		buttonBeginScrng.setOnTouchListener(this);
 		testSetIdx = 0;
 		// Moved from R.id.buttonBeginScrng at onClick End
 
@@ -137,15 +137,16 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		// TODO Auto-generated method stub
-		RelativeLayout layout = (RelativeLayout)findViewById(R.id.layout_screening);
+		//RelativeLayout layout = (RelativeLayout)findViewById(R.id.layout_screening);
+		Button buttonBeginScrng = (Button)findViewById(R.id.buttonBeginScrng);
 		TextView textViewTesting =(TextView)findViewById(R.id.textViewScrngComplete);
 		// TODO Auto-generated method stub
 		switch(v.getId()){
-		case R.id.layout_screening:
+		case R.id.buttonBeginScrng:
 			if(event.getAction() == MotionEvent.ACTION_DOWN){
 				// TODO Pressing Screening - Tone Play!
 				if (testSetIdx < scrSet.size()){
-					layout.setBackgroundResource(R.color.green);
+					buttonBeginScrng.setBackgroundResource(R.color.green);
 					/* ToneThread Constructor */
 					mToneThread = new ToneThread(sampleRate, scrSet.get(testSetIdx).getEarSide(), scrSet.get(testSetIdx).getFrequency(), scrSet.get(testSetIdx).getDeciBel());
 					mToneThread.start();
@@ -165,7 +166,7 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 			            //Toast.makeText(this, "idx= "+ testSetIdx +"&frq= "+scrTestData.get(scrTestData.size()-1).getFrequency()+"&dB="+scrTestData.get(scrTestData.size()-1).getDeciBel(), Toast.LENGTH_SHORT).show();
 					}
 					mMainHandler.sendEmptyMessage(SEND_THREAD_STOP_MESSAGE);
-					layout.setBackgroundResource(R.color.red);
+					buttonBeginScrng.setBackgroundResource(R.color.red);
 					TextView textInstrSub3 =(TextView)findViewById(R.id.textInstrSub3);
 					textInstrSub3.setText("<Progress : " + Integer.toString(testSetIdx+1) + " of " + Integer.toString(scrSet.size()) + " sets>");
 				}
@@ -176,8 +177,9 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 					scrTestData.add(new TestDataModel(0, 0, mToneThread.get_ear_side(), (int)mToneThread.getSynth_frequency(), mToneThread.getdB()));
 					mMainHandler.sendEmptyMessage(SEND_THREAD_STOP_MESSAGE);
 					scrUserData.add(new ScreeningModel(0,firstName, lastName, userID, now.format("%Y-%m-%d %H:%M:%S")));
-					layout.setBackgroundResource(R.color.black);
-					layout.setOnTouchListener(null);
+					buttonBeginScrng.setBackgroundResource(R.color.black);
+					buttonBeginScrng.setOnTouchListener(null);
+					buttonBeginScrng.setVisibility(View.INVISIBLE);
 					/* Write data into DB */
 					ScreeningSetDBManager dbManager = new ScreeningSetDBManager(this);
 					long setId = dbManager.insertUserData(scrUserData.get(0));

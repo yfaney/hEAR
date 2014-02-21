@@ -38,8 +38,9 @@ public class TrialRunActivity extends Activity implements OnClickListener, OnTou
 		setContentView(R.layout.activity_trial_run);
         Button buttonBeginTrial = (Button)findViewById(R.id.buttonBeginTrial);
         Button buttonBeginScrning = (Button)findViewById(R.id.buttonBeginScrning);
+        buttonBeginTrial.setOnTouchListener(this);
+        buttonBeginTrial.setBackgroundResource(R.color.red);
         buttonBeginScrning.setVisibility(View.INVISIBLE);  // 화면에 안보임
-        buttonBeginTrial.setOnClickListener(this);
         buttonBeginScrning.setOnClickListener(this);
         mMainHandler = new SendMassgeHandler();
         
@@ -48,13 +49,13 @@ public class TrialRunActivity extends Activity implements OnClickListener, OnTou
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC) , 0);
         
 		// Moved from at R.id.buttonBeginTrial - onClick() Start
-		TextView textViewTesting =(TextView)findViewById(R.id.textViewTrialComplete);
+		//TextView textViewTesting =(TextView)findViewById(R.id.textViewTrialComplete);
 		// TODO Trial Starting
-		textViewTesting.setText(getResources().getString(R.string.btn_trialTesting));
-		buttonBeginTrial.setVisibility(View.INVISIBLE);
-		RelativeLayout layout = (RelativeLayout)findViewById(R.id.layout_trial_run);
-		layout.setBackgroundResource(R.color.red);
-		layout.setOnTouchListener(this);
+		//textViewTesting.setText(getResources().getString(R.string.btn_trialTesting));
+		//buttonBeginTrial.setVisibility(View.INVISIBLE);
+		//RelativeLayout layout = (RelativeLayout)findViewById(R.id.layout_trial_run);
+		//layout.setBackgroundResource(R.color.red);
+		//layout.setOnTouchListener(this);
 		// Moved from at R.id.buttonBeginTrial - onClick() End
 	}
     @Override
@@ -121,14 +122,14 @@ public class TrialRunActivity extends Activity implements OnClickListener, OnTou
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		// TODO Auto-generated method stub
-		RelativeLayout layout = (RelativeLayout)findViewById(R.id.layout_trial_run);
+		Button buttonBeginTrial = (Button)findViewById(R.id.buttonBeginTrial);
 		TextView textViewTesting =(TextView)findViewById(R.id.textViewTrialComplete);
 		// TODO Auto-generated method stub
 		switch(v.getId()){
-		case R.id.layout_trial_run:
+		case R.id.buttonBeginTrial:
 			if(event.getAction() == MotionEvent.ACTION_DOWN){
 				if (toneTestSound > 0 && frequency > 0){
-					layout.setBackgroundResource(R.color.green);
+					buttonBeginTrial.setBackgroundResource(R.color.green);
 					if(toneside == 1){
 						mToneThread = new ToneThread(sampleRate, ToneThread.LEFT_EAR, frequency, (short)50);
 						mToneThread.start();
@@ -144,8 +145,8 @@ public class TrialRunActivity extends Activity implements OnClickListener, OnTou
 				}
 				else{
 					mMainHandler.sendEmptyMessage(SEND_THREAD_STOP_MESSAGE);
-					layout.setBackgroundResource(R.color.black);
-					layout.setOnTouchListener(null);
+					buttonBeginTrial.setBackgroundResource(R.color.black);
+					buttonBeginTrial.setOnTouchListener(null);
 					textViewTesting.setText(getResources().getString(R.string.btn_scrningComplete));
 			        Button buttonBeginScrning = (Button)findViewById(R.id.buttonBeginScrning);
 			        buttonBeginScrning.setVisibility(View.VISIBLE);  // 화면에 안보임
@@ -154,18 +155,17 @@ public class TrialRunActivity extends Activity implements OnClickListener, OnTou
 			else if(event.getAction() == MotionEvent.ACTION_UP){
 				if (toneTestSound > 0){
 					mMainHandler.sendEmptyMessage(SEND_THREAD_STOP_MESSAGE);
-					layout.setBackgroundResource(R.color.red);
+					buttonBeginTrial.setBackgroundResource(R.color.red);
 				}
 				else{
 					mMainHandler.sendEmptyMessage(SEND_THREAD_STOP_MESSAGE);
-					layout.setBackgroundResource(R.color.black);
-					layout.setOnTouchListener(null);
+					buttonBeginTrial.setBackgroundResource(R.color.black);
+					buttonBeginTrial.setOnTouchListener(null);
+					buttonBeginTrial.setVisibility(View.INVISIBLE);
 					TextView textInstrSub1 =(TextView)findViewById(R.id.textInstrSub1);
 					TextView textInstrSub2 =(TextView)findViewById(R.id.textInstrSub2);
-					TextView textInstrSub3 =(TextView)findViewById(R.id.textInstrSub3);
 					textInstrSub1.setVisibility(View.INVISIBLE);
 					textInstrSub2.setVisibility(View.INVISIBLE);
-					textInstrSub3.setVisibility(View.INVISIBLE);
 					textViewTesting.setText(getResources().getString(R.string.btn_scrningComplete));
 			        Button buttonBeginScrning = (Button)findViewById(R.id.buttonBeginScrning);
 			        buttonBeginScrning.setVisibility(View.VISIBLE);  // 화면에 안보임
