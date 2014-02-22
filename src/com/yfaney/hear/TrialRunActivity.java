@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -36,10 +37,10 @@ public class TrialRunActivity extends Activity implements OnClickListener, OnTou
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_trial_run);
-        Button buttonBeginTrial = (Button)findViewById(R.id.buttonBeginTrial);
+        ImageButton buttonBeginTrial = (ImageButton)findViewById(R.id.buttonBeginTrial);
         Button buttonBeginScrning = (Button)findViewById(R.id.buttonBeginScrning);
         buttonBeginTrial.setOnTouchListener(this);
-        buttonBeginTrial.setBackgroundResource(R.color.red);
+        //buttonBeginTrial.setBackgroundResource(R.color.red);
         buttonBeginScrning.setVisibility(View.INVISIBLE);  // 화면에 안보임
         buttonBeginScrning.setOnClickListener(this);
         mMainHandler = new SendMassgeHandler();
@@ -122,14 +123,15 @@ public class TrialRunActivity extends Activity implements OnClickListener, OnTou
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		// TODO Auto-generated method stub
-		Button buttonBeginTrial = (Button)findViewById(R.id.buttonBeginTrial);
+		ImageButton buttonBeginTrial = (ImageButton)findViewById(R.id.buttonBeginTrial);
 		TextView textViewTesting =(TextView)findViewById(R.id.textViewTrialComplete);
 		// TODO Auto-generated method stub
 		switch(v.getId()){
 		case R.id.buttonBeginTrial:
 			if(event.getAction() == MotionEvent.ACTION_DOWN){
+				buttonBeginTrial.setImageResource(R.drawable.button_focused);
 				if (toneTestSound > 0 && frequency > 0){
-					buttonBeginTrial.setBackgroundResource(R.color.green);
+					//buttonBeginTrial.setBackgroundResource(R.color.green);
 					if(toneside == 1){
 						mToneThread = new ToneThread(sampleRate, ToneThread.LEFT_EAR, frequency, (short)50);
 						mToneThread.start();
@@ -145,7 +147,7 @@ public class TrialRunActivity extends Activity implements OnClickListener, OnTou
 				}
 				else{
 					mMainHandler.sendEmptyMessage(SEND_THREAD_STOP_MESSAGE);
-					buttonBeginTrial.setBackgroundResource(R.color.black);
+					//buttonBeginTrial.setBackgroundResource(R.color.black);
 					buttonBeginTrial.setOnTouchListener(null);
 					textViewTesting.setText(getResources().getString(R.string.btn_scrningComplete));
 			        Button buttonBeginScrning = (Button)findViewById(R.id.buttonBeginScrning);
@@ -153,13 +155,14 @@ public class TrialRunActivity extends Activity implements OnClickListener, OnTou
 				}
 			}
 			else if(event.getAction() == MotionEvent.ACTION_UP){
+				buttonBeginTrial.setImageResource(R.drawable.button_unfocused);
 				if (toneTestSound > 0){
 					mMainHandler.sendEmptyMessage(SEND_THREAD_STOP_MESSAGE);
-					buttonBeginTrial.setBackgroundResource(R.color.red);
+					//buttonBeginTrial.setBackgroundResource(R.color.red);
 				}
 				else{
 					mMainHandler.sendEmptyMessage(SEND_THREAD_STOP_MESSAGE);
-					buttonBeginTrial.setBackgroundResource(R.color.black);
+					//buttonBeginTrial.setBackgroundResource(R.color.black);
 					buttonBeginTrial.setOnTouchListener(null);
 					buttonBeginTrial.setVisibility(View.INVISIBLE);
 					TextView textInstrSub1 =(TextView)findViewById(R.id.textInstrSub1);

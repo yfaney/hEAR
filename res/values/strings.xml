@@ -29,7 +29,7 @@
 
     <!-- Instruction Text -->
     <string name="txt_instruction1">* Please note that the volume will be adjusted to max automatically.</string>
-    <string name="txt_instrSub1">* Playing tone will start with pressing &#9836; button, and keep pressing until you cannot hear the tone.</string>
+    <string name="txt_instrSub1">* Playing tone will start with pressing &quot;play&quot; button, and keep pressing until you cannot hear the tone.</string>
 	<string name="txt_instrSub2">* The tone changes several time while testing.</string>
 	<string name="txt_instrSub3">* Repeat until test is completed</string>
 	<string name="txt_instruction2">You will have a brief trial to get you used to the procedure.</string>

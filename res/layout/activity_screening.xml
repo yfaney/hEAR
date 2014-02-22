@@ -14,7 +14,7 @@
         style="@style/ScreeningTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/buttonBeginScrng"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:text="@string/txt_scrningStart" />
@@ -48,26 +48,25 @@
 	    android:layout_alignParentRight="true"
 	    android:layout_below="@+id/textInstrSub2"
 	    android:text="@string/txt_instrSub3" />
-	
-	<Button
-	    android:id="@+id/buttonBeginScrng"
-	    style="@style/TonePlayButtonStyle"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_above="@+id/buttonExitToMain"
-	    android:layout_alignLeft="@+id/textInstrSub3"
-	    android:layout_alignParentRight="true"
-	    android:layout_below="@+id/textInstrSub3"
-	    android:text="@string/btn_playTone" />
 
 	<Button
 	    android:id="@+id/buttonExitToMain"
 	    style="@style/ScreeningButtonStyle"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_alignLeft="@+id/buttonBeginScrng"
 	    android:layout_alignParentBottom="true"
+	    android:layout_alignParentLeft="true"
 	    android:layout_alignParentRight="true"
 	    android:text="@string/btn_exitToMain" />
+
+	<ImageButton
+	    android:id="@+id/buttonBeginScrng"
+	    style="@style/TonePlayButtonStyle"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/textInstrSub3"
+	    android:layout_centerHorizontal="true"
+	    android:background="@drawable/buttonselector1"
+	    android:contentDescription="@string/btn_playTone" />
     
 </RelativeLayout>

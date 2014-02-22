@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -56,7 +57,7 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 		setContentView(R.layout.activity_screening);
         
 		/* GUI */
-		Button buttonBeginScrng = (Button)findViewById(R.id.buttonBeginScrng);
+		ImageButton buttonBeginScrng = (ImageButton)findViewById(R.id.buttonBeginScrng);
         Button buttonExitToMain = (Button)findViewById(R.id.buttonExitToMain);
 
         /* GUI Listener */
@@ -86,7 +87,7 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 			}
 		}
 		Collections.shuffle(scrSet);
-		buttonBeginScrng.setBackgroundResource(R.color.red);
+		//buttonBeginScrng.setBackgroundResource(R.color.red);
 		buttonBeginScrng.setOnTouchListener(this);
 		testSetIdx = 0;
 		// Moved from R.id.buttonBeginScrng at onClick End
@@ -138,15 +139,16 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 	public boolean onTouch(View v, MotionEvent event) {
 		// TODO Auto-generated method stub
 		//RelativeLayout layout = (RelativeLayout)findViewById(R.id.layout_screening);
-		Button buttonBeginScrng = (Button)findViewById(R.id.buttonBeginScrng);
+		ImageButton buttonBeginScrng = (ImageButton)findViewById(R.id.buttonBeginScrng);
 		TextView textViewTesting =(TextView)findViewById(R.id.textViewScrngComplete);
 		// TODO Auto-generated method stub
 		switch(v.getId()){
 		case R.id.buttonBeginScrng:
 			if(event.getAction() == MotionEvent.ACTION_DOWN){
+				buttonBeginScrng.setImageResource(R.drawable.button_focused);
 				// TODO Pressing Screening - Tone Play!
 				if (testSetIdx < scrSet.size()){
-					buttonBeginScrng.setBackgroundResource(R.color.green);
+					//buttonBeginScrng.setBackgroundResource(R.color.green);
 					/* ToneThread Constructor */
 					mToneThread = new ToneThread(sampleRate, scrSet.get(testSetIdx).getEarSide(), scrSet.get(testSetIdx).getFrequency(), scrSet.get(testSetIdx).getDeciBel());
 					mToneThread.start();
@@ -155,6 +157,7 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 				}
 			}
 			else if(event.getAction() == MotionEvent.ACTION_UP){
+				buttonBeginScrng.setImageResource(R.drawable.button_unfocused);
 				// TODO Releasing Screening - Tone Stop!
 				if (testSetIdx+1 < scrSet.size()){
 					if(scrSet.get(testSetIdx).getDeciBel() == mToneThread.getdB()){
@@ -166,7 +169,7 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 			            //Toast.makeText(this, "idx= "+ testSetIdx +"&frq= "+scrTestData.get(scrTestData.size()-1).getFrequency()+"&dB="+scrTestData.get(scrTestData.size()-1).getDeciBel(), Toast.LENGTH_SHORT).show();
 					}
 					mMainHandler.sendEmptyMessage(SEND_THREAD_STOP_MESSAGE);
-					buttonBeginScrng.setBackgroundResource(R.color.red);
+					//buttonBeginScrng.setBackgroundResource(R.color.red);
 					TextView textInstrSub3 =(TextView)findViewById(R.id.textInstrSub3);
 					textInstrSub3.setText("<Progress : " + Integer.toString(testSetIdx+1) + " of " + Integer.toString(scrSet.size()) + " sets>");
 				}
@@ -177,7 +180,7 @@ public class ScreeningActivity extends Activity implements OnClickListener, OnTo
 					scrTestData.add(new TestDataModel(0, 0, mToneThread.get_ear_side(), (int)mToneThread.getSynth_frequency(), mToneThread.getdB()));
 					mMainHandler.sendEmptyMessage(SEND_THREAD_STOP_MESSAGE);
 					scrUserData.add(new ScreeningModel(0,firstName, lastName, userID, now.format("%Y-%m-%d %H:%M:%S")));
-					buttonBeginScrng.setBackgroundResource(R.color.black);
+					//buttonBeginScrng.setBackgroundResource(R.color.black);
 					buttonBeginScrng.setOnTouchListener(null);
 					buttonBeginScrng.setVisibility(View.INVISIBLE);
 					/* Write data into DB */
